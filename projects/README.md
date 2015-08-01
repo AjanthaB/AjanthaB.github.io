@@ -1,2 +1,0 @@
-# AjanthaB blog using bootstrap
-
