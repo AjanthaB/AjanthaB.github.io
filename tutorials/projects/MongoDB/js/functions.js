@@ -14,7 +14,7 @@ function create_ace (code) {
     var num = document.getElementsByTagName('pre');   
     for(var i=0; i<num.length; i++){
         var editor = "editor"+i;
-        document.getElementsByTagName('pre')[i].setAttribute("id",editor);
+        document.('pre')[i].sgetElementsByTagNameetAttribute("id",editor);
         var editor = ace.edit(editor);
         editor.setTheme("ace/theme/monokai");
         editor.session.setMode("ace/mode/javascript");
