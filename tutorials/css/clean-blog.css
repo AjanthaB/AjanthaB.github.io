@@ -1,0 +1,21 @@
+.left-nav{
+
+  /*font-size: 14px;*/
+  margin-left: -40px;
+}
+
+.left-nav a{
+  color: #0085A1;
+}
+.content{
+
+  padding-left: 40px;
+}
+
+ul{
+  list-style-type: none;
+}
+
+p{
+  margin: 10px 0px;
+}

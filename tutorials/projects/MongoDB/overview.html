@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="install Mongodb and basics">
+    <meta name="author" content="install Mongodb and basics">
+
+    <title>AjanthaB</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/clean-blog.min.css" rel="stylesheet">
+    <link href="../../css/clean-blog.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+ 
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../index.html">AjanthaB</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="http://ajantha.elvinlabs.com/">About</a>
+                    </li>
+                   <!--  <li>
+                        <a href="post.html">Sample Post</a>
+                    </li> -->
+                    <li>
+                        <a href="http://ajantha.elvinlabs.com/">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('mongodb.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1 style="color:#0085A1;">install MongoDB and Learn basics </h1>
+                        
+                        <span class="meta">Posted by <a href="#">AjanthaB</a> on Sep 14, 2015</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-3">
+                    <ul class="left-nav">
+
+                        <p><b>Other Topics</b></p>
+                        <li>
+                            <a href="index.html">MongoDB Install</a>
+                        </li>
+                        <li>
+                            <a href="overview.html">MongoDB Overview</a>
+                        </li>
+                    </ul>  
+                </div>
+
+
+                <div class="col-lg-9  col-md-8 ">
+                    
+
+
+                    <h3>Relationship of RDBMS terminalogy with MongoDB</h3>
+
+                    <table class="table">
+                    	<thead>
+                    		<tr>
+                    			<td>RDBMS</td>
+                    			<td>MongoDB</td>
+                    		</tr>
+                    	</thead>
+                    	<tbody class="tbody">
+                    		<tr>
+                    			<td>Database</td>
+                    			<td>Database</td>
+                    		</tr>
+                    		<tr>
+                    			<td>Table</td>
+                    			<td>Collection</td>
+                    		</tr>
+                    		<tr>
+                    			<td>Row</td>
+                    			<td>Documents</td>
+                    		</tr>
+                    		<tr>
+                    			<td>Column</td>
+                    			<td>Field</td>
+                    		</tr>
+                    		<tr>
+                    			<td>Primary kay</td>
+                    			<td>Primary Key (Default key _id provided by mongodb itself)</td>
+                    		</tr>
+                    	</tbody>
+                    </table>
+
+                    <h3>Database server and client</h3>
+                    <table class="table">
+                    	<tr>
+                    		<td>Mysqld/Oracle</td>
+                    		<td>mongod</td>
+                    	</tr>
+                    	<tr>
+                    		<td>mysql/sqlplus</td>
+                    		<td>mongo</td>
+                    	</tr>
+                    </table>
+
+                    <h3>Sample document</h3>
+
+                     <pre class="caption-full editor">{
+   _id: ObjectId(adf78ad8902c),
+   title: 'MongoDB Overview', 
+   description: 'MongoDB is no sql database',
+   by: 'ajantha.elvinlabs.com',
+   url: 'http://www.ajantha.elvinlabs.com/tutorials',
+   tags: ['mongodb', 'database', 'NoSQL'],
+   likes: 100, 
+   comments: [	
+      {
+         user:'user1',
+         message: 'My first comment',
+         dateCreated: new Date(2015,09,14,10,15),
+         like: 0 
+      },
+      {
+         user:'user2',
+         message: 'My second comments',
+         dateCreated: new Date(2015,1,25,7,45),
+         like: 5
+      }
+   ]
+} 
+
+    </pre>
+
+
+
+                <h3>Now open the Mongo client(discussed in previous tutorial)</h3>
+                <p>now you can write the query</p>
+
+               	<h3>Create Database</h3>
+            	<p>Simple way to create database we can use <b>use DATABASE_NAME</b>  as example</p>
+                <pre class="caption-full editor">>use mydb
+switched to db mydb
+
+                </pre>
+
+            	<p>using <b>db</b> command you can see where you now</p>
+                <pre>>db
+mydb</pre>
+            	<p><b>show dbs</b> commands will show the the databases already created</p>
+                <pre>>show dbs
+contaclist   0.078GB
+local        0.078GB
+</pre>        	
+                <p>but <b>mydb</b> is not in the list. to show that we should insert at least one document into it</p>
+                <p>Using bellow command you can insert documents into test collection(table)</p>
+                <pre>db.mydb.insert({"name":"test the db"})</pre>
+                <p>it will show the bellow result</p>
+                <pre>> db.mydb.insert({"name":"envinlabs.com"})
+WriteResult({ "nInserted" : 1 })</pre>
+                <p>now use <b>show dbs</b> command</p>
+                <pre>> show dbs;
+contaclist   0.078GB
+local        0.078GB
+mydb         0.078GB</pre>
+
+                <h3>Drop Database</h3>
+                <p><b>db.dropDatabase()</b> command is used to drop existing database</p>
+                <p>Example</p>
+                <pre>> use mydb
+switched to db mydb
+>
+> db.dropDatabase()
+{ "dropped" : "mydb", "ok" : 1 }</pre>
+                <p>now check list of databses using show dbs command</p>
+                <pre>> show databases;
+contactlist  0.078GB
+local        0.078GB</pre>
+
+                <h3>The createCollection() Method</h3>
+                <p> <b>db.createCollection(name, options) </b>command is used to create collection </p>
+                <p>name is the name of the collection and options is a document and used to specify configuration of collection</p>
+
+                <p>Example</p>
+                <pre>> db.createCollection("testCollection")
+{ "ok" : 1 }
+></pre>         <p>you can see the collection have been created using <b>show collections</b> command</p>
+                <pre>> show collections
+system.indexes
+testCollection
+></pre>         <p>normaly we don't need to create collection, because MongoDB create collection automatically when we insert some document.</p>
+                <pre>> db.elvinlabs.insert({"name":"elvinlabs.com"})
+WriteResult({ "nInserted" : 1 })
+> show collections
+elvinlabs
+system.indexes
+testCollection
+></pre>         
+                <h3>The drop() Method</h3>
+                <p> <b>db.collection.drop()</b> method is used to drop specific collection</p>
+                <p>Example</p>
+                <pre>> show collections
+elvinlabs
+system.indexes
+testCollection
+>
+> db.testCollection.drop()
+true
+>
+> show collections
+elvinlabs
+system.indexes
+></pre>
+
+            <h3>Datatype list supports by the MongoDB</h3>
+            <ul>
+                <li><b>String : </b>String in MongoDB must be UTF-8 valid and this is most commonly used datatype. </li>
+                <li><b>Integer : </b> Used to store the numerical value. Integer can be 32bit or 64bit depending upon your server</li>
+                <li><b>Boolean : </b> Used to store the boolean value (true/false)</li>
+                <li><b>Double : </b> Used to store floating point value.</li>
+                <li>there are many other datatypes not listed here </li>
+            </ul>
+
+            <h3>The insert() Method</h3>
+            <p><b>insert() or save()</b> method is used to insert data to collection in MongoDB</p>
+            <p>Example</p>
+            <pre>db.collectionName.insert(Document)</pre>
+            <pre>> db.mydb.insert(
+{
+    title:"learn mongodb",
+    description:"this is tutorial for learn mongodb",
+    writtenBy:"AjanthaB",
+    utl:"ajantha.elvinlabs.com/tutorial",
+    likes:10,
+    comments:[]
+}
+)
+WriteResult({ "nInserted" : 1 })
+></pre>
+
+
+            <p>when we insert document into collection ObjectId will be added automaticaly by Mongodb. it is unique for this document.</p>
+
+            <p>we can insert multiple documents using insert() method</p>
+            <p>Example code</p>
+            <pre>> db.mydb.insert(
+{
+    title:"mongodb insert methode",
+    description:"this is tutorial for learn mongodb",
+    writtenBy:"AjanthaB",
+    url:"ajantha.elvinlabs.com/tutorial",l
+    ikes:10,
+    comments:[
+        {   user:"user 1",
+            msg:"test msg"
+        }
+    ]
+},
+{
+    title:"test title",
+    description:"test description",
+    writtenBy:"AjanthaB"
+    ,url:"test url",
+    likes:100,
+    comments:[
+        {
+            user:"test user",
+            msg:"test msg"
+        }
+    ]
+}
+)
+WriteResult({ "nInserted" : 1 })
+></pre>
+
+
+            <p>using <b>db.mydb.save(documents)</b> methode we can do same thing</p>
+            
+
+            <h3>The find() Method</h3>
+            <p><b>db.Collection_Name.find()</b> method is used to query data from the MongoDB collection. But this will show the documents as non structured way</p>
+
+            <h3>The pretty() Method</h3>
+            <p><b>db.Collection_NAME.find().pretty()</b> method is used to display documents as structured way.</p>
+
+            <p>Example code</p>
+            <pre>
+> db.mydb.find()
+{ "_id" : ObjectId("55f6c357b5aa4dee6cc075bc"), "title" : "learn mongodb", "description" : "this is tutorial for learn mongodb", "writtenBy" : "AjanthaB", "utl" : "ajantha.elvinlabs.com/tutorial", "likes" : 10, "comments" : [ ] }
+{ "_id" : ObjectId("55f6c70fb5aa4dee6cc075bd"), "title" : "mongodb insert methode", "description" : "this is tutorial for learn mongodb", "writtenBy" : "AjanthaB", "url" : "ajantha.elvinlabs.com/tutorial", "likes" : 10, "comments" : [ { "user" : "user 1", "msg" : "test msg" } ] }
+>
+>
+> db.mydb.find().pretty()
+{
+        "_id" : ObjectId("55f6c357b5aa4dee6cc075bc"),
+        "title" : "learn mongodb",
+        "description" : "this is tutorial for learn mongodb",
+        "writtenBy" : "AjanthaB",
+        "utl" : "ajantha.elvinlabs.com/tutorial",
+        "likes" : 10,
+        "comments" : [ ]
+}
+{
+        "_id" : ObjectId("55f6c70fb5aa4dee6cc075bd"),
+        "title" : "mongodb insert methode",
+        "description" : "this is tutorial for learn mongodb",
+        "writtenBy" : "AjanthaB",
+        "url" : "ajantha.elvinlabs.com/tutorial",
+        "likes" : 10,
+        "comments" : [
+                {
+                        "user" : "user 1",
+                        "msg" : "test msg"
+                }
+        ]
+}
+></pre>    
+
+
+
+            <p>you can see if we used find() method we canot get structured display</p>
+
+
+
+            <h3>RDBMS Where Clause Equivalents in MongoDB</h3>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Operation</td>
+                        <td>Syntax</td>
+                        <td>Example</td>
+                        <td>RDBMS Equivalent</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Equality</td>
+                        <td>{&ltkey&gt:&ltvalue&gt}</td>
+                        <td>db.mydb.find({"writtenBy":<br>"AjanthaB"}).pretty()</td>
+                        <td>Where writtenBy="AjanthaB"</td>
+                    </tr>
+                    <tr>
+                        <td>Less Than</td>
+                        <td>{<key>:{$lt:<value>}}</td>
+                        <td>db.mydb.find({"likes":{$lt:50}}).pretty()</td>
+                        <td>Where likes < 50</td>
+                    </tr>
+                    <tr>
+                        <td>Less Than Equals</td>
+                        <td>{<key>:{$lte:<value>}}</td>
+                        <td>db.mydb.find({"likes":{$lte:50}}).pretty()</td>
+                        <td>Where likes <= 50</td>
+                    </tr>
+                    <tr>
+                        <td>Greater Than</td>
+                        <td>{<key>:{$gt:<value>}}</td>
+                        <td>db.mydb.find({"likes":{$gt:50}}).pretty()</td>
+                        <td>Where likes > 50</td>
+                    </tr>
+                    <tr>
+                        <td>Greater Than Equals</td>
+                        <td>{<key>:{$gte:<value>}}</td>
+                        <td>db.mydb.find({"likes":{$gte:50}}).pretty()</td>
+                        <td>Where likes >= 50</td>
+                    </tr>
+                    <tr>
+                        <td>Not Equals</td>
+                        <td>{<key>:{$ne:<value>}}</td>
+                        <td>db.mydb.find({"likes":{$ne:50}}).pretty()</td>
+                        <td>Where likes != 50</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+   <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../../js/clean-blog.min.js"></script>
+     
+     <script>
+      
+    </script>
+
+</body>
+
+</html>
