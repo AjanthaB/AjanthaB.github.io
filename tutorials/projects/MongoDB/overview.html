@@ -441,9 +441,94 @@ WriteResult({ "nInserted" : 1 })
         ]
 }</code></pre>
 
+            <h3>OR operation in MongoDB</h3>
+            <p>To use <b>OR</b> operation in mongodb you need to use <b>$or</b> key word</p>
+            <pre><code data-language="javascript">> db.mydb.find(
+{
+    $or:    [
+                {key1:value1},
+                {key2:value2}
+            ]
+}).pretty()</code></pre>
 
+            <p>Example</p>
+            <pre><code data-language="javascript">> db.mydb.find({$or:[{"title":"learn mongodb"},{"writtenBy":"AjanthaB"}]}).pretty()
+{
+        "_id" : ObjectId("55f6c357b5aa4dee6cc075bc"),
+        "title" : "learn mongodb",
+        "description" : "this is tutorial for learn mongodb",
+        "writtenBy" : "AjanthaB",
+        "utl" : "ajantha.elvinlabs.com/tutorial",
+        "likes" : 10,
+        "comments" : [ ]
+}
+{
+        "_id" : ObjectId("55f6c70fb5aa4dee6cc075bd"),
+        "title" : "mongodb insert methode",
+        "description" : "this is tutorial for learn mongodb",
+        "writtenBy" : "AjanthaB",
+        "url" : "ajantha.elvinlabs.com/tutorial",
+        "likes" : 10,
+        "comments" : [
+                {
+                        "user" : "user 1",
+                        "msg" : "test msg"
+                }
+        ]
+}
+></code></pre>
 
+            <h3>AND and OR operation together</h3>
+            <p>This example show the both operation together. likes less than 15 and title equal "learn mongodb" or comments equal "".</p>
+            <pre><code data-language="javascript">> db.mydb.find({"likes":{$lt:15},$or:[{"title":"learn mongodb"},{"comments":""}]}).pretty()
+{
+        "_id" : ObjectId("55f6c357b5aa4dee6cc075bc"),
+        "title" : "learn mongodb",
+        "description" : "this is tutorial for learn mongodb",
+        "writtenBy" : "AjanthaB",
+        "utl" : "ajantha.elvinlabs.com/tutorial",
+        "likes" : 10,
+        "comments" : [ ]
+}
+></code></pre>
 
+            <h3>Update() method in MongoDB</h3>
+            <p><b>update()</b> and <b>save()</b> mwthodes are used to update documents in collection.If we used update() methode existing values will update, if we used save() method existing document will replace passed in save method.</p>
+            <pre><code data-language="javascript">db.mydb.collectionName.update(selections, updated_data)</code></pre>
+            <p>Let consider this example</p>
+            <pre><code data-language="javascript">> db.mydb.find({"title":"learn mongodb"}).pretty()
+{
+        "_id" : ObjectId("55f6c357b5aa4dee6cc075bc"),
+        "title" : "learn mongodb",
+        "description" : "this is tutorial for learn mongodb",
+        "writtenBy" : "AjanthaB",
+        "utl" : "ajantha.elvinlabs.com/tutorial",
+        "likes" : 10,
+        "comments" : [ ]
+}
+></code></pre>
+
+            <p>let's update title of this document as "updated title"</p>
+            <pre><code data-language="javascript">> db.mydb.update({"title":"learn mongodb"},{$set:{"title":"updated title"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+></code></pre>
+
+            <p>Example for save() method in mongoDB</p>
+            <pre><code data-language="javascript">> db.mydb.save({"_id" : ObjectId("55f6c357b5aa4dee6cc075bc")},{"title":"save methode","description":"changed document using save method"})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })</code></pre>
+                
+            <h3>remove() Method in MongoDB</h3>
+            <p><b>remove()</b> method is used to remove document from collection. remove method accepts two parameters. First one is deletion criteria and second is flag if set true or 1, then remove only one document</p>
+
+            <pre><code code-language="javascript">db.mydb.remove(Deletion_criteria)</code></pre>
+            <p>Example for remove method</p>
+            <pre><code code-language="javascript">> db.mydb.remove({"title":"mongodb insert methode"})
+WriteResult({ "nRemoved" : 1 })
+></code></pre>
+            <p>remove only one document</p>
+            <pre><code data-language="javascript">db.mydb.remove(Deletion_criterial,1)</code></pre>
+            <p>To remove all documents</p>
+            <pre><code data-language="javascript">db.mydb.remove()</code></pre>
                 </div>
             </div>
         </div>
