@@ -17,6 +17,7 @@
     <!-- Custom CSS -->
     <link href="../../css/clean-blog.min.css" rel="stylesheet">
     <link href="../../css/clean-blog.css" rel="stylesheet">
+    <link href="../../css/themes/monokai.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -151,7 +152,7 @@
 
                     <h3>Sample document</h3>
 
-                     <pre class="caption-full editor">{
+                     <pre class="caption-full editor"><code data-language="javascript">{
    _id: ObjectId(adf78ad8902c),
    title: 'MongoDB Overview', 
    description: 'MongoDB is no sql database',
@@ -175,7 +176,7 @@
    ]
 } 
 
-    </pre>
+   </code> </pre>
 
 
 
@@ -184,67 +185,67 @@
 
                	<h3>Create Database</h3>
             	<p>Simple way to create database we can use <b>use DATABASE_NAME</b>  as example</p>
-                <pre class="caption-full editor">>use mydb
+                <pre class="caption-full editor"><code data-language="javascript">>use mydb
 switched to db mydb
 
-                </pre>
+               </code> </pre>
 
             	<p>using <b>db</b> command you can see where you now</p>
-                <pre>>db
-mydb</pre>
+                <pre><code data-language="javascript">>db
+mydb</code></pre>
             	<p><b>show dbs</b> commands will show the the databases already created</p>
-                <pre>>show dbs
+                <pre><code data-language="javascript">>show dbs
 contaclist   0.078GB
 local        0.078GB
-</pre>        	
+</code></pre>        	
                 <p>but <b>mydb</b> is not in the list. to show that we should insert at least one document into it</p>
                 <p>Using bellow command you can insert documents into test collection(table)</p>
-                <pre>db.mydb.insert({"name":"test the db"})</pre>
+                <pre><code data-language="javascript">db.mydb.insert({"name":"test the db"})</code></pre>
                 <p>it will show the bellow result</p>
-                <pre>> db.mydb.insert({"name":"envinlabs.com"})
-WriteResult({ "nInserted" : 1 })</pre>
+                <pre><code data-language="javascript">> db.mydb.insert({"name":"envinlabs.com"})
+WriteResult({ "nInserted" : 1 })</code></pre>
                 <p>now use <b>show dbs</b> command</p>
-                <pre>> show dbs;
+                <pre><code data-language="javascript">> show dbs;
 contaclist   0.078GB
 local        0.078GB
-mydb         0.078GB</pre>
+mydb         0.078GB</code></pre>
 
                 <h3>Drop Database</h3>
                 <p><b>db.dropDatabase()</b> command is used to drop existing database</p>
                 <p>Example</p>
-                <pre>> use mydb
+                <pre><code data-language="javascript">> use mydb
 switched to db mydb
 >
 > db.dropDatabase()
-{ "dropped" : "mydb", "ok" : 1 }</pre>
+{ "dropped" : "mydb", "ok" : 1 }</code></pre>
                 <p>now check list of databses using show dbs command</p>
-                <pre>> show databases;
+                <pre><code data-language="javascript">> show databases;
 contactlist  0.078GB
-local        0.078GB</pre>
+local        0.078GB</code></pre>
 
                 <h3>The createCollection() Method</h3>
                 <p> <b>db.createCollection(name, options) </b>command is used to create collection </p>
                 <p>name is the name of the collection and options is a document and used to specify configuration of collection</p>
 
                 <p>Example</p>
-                <pre>> db.createCollection("testCollection")
+                <pre><code data-language="javascript">> db.createCollection("testCollection")
 { "ok" : 1 }
-></pre>         <p>you can see the collection have been created using <b>show collections</b> command</p>
-                <pre>> show collections
+></code></pre>         <p>you can see the collection have been created using <b>show collections</b> command</p>
+                <pre><code data-language="javascript">> show collections
 system.indexes
 testCollection
-></pre>         <p>normaly we don't need to create collection, because MongoDB create collection automatically when we insert some document.</p>
-                <pre>> db.elvinlabs.insert({"name":"elvinlabs.com"})
+></code></pre>         <p>normaly we don't need to create collection, because MongoDB create collection automatically when we insert some document.</p>
+                <pre><code data-language="javascript">> db.elvinlabs.insert({"name":"elvinlabs.com"})
 WriteResult({ "nInserted" : 1 })
 > show collections
 elvinlabs
 system.indexes
 testCollection
-></pre>         
+></code></pre>         
                 <h3>The drop() Method</h3>
                 <p> <b>db.collection.drop()</b> method is used to drop specific collection</p>
                 <p>Example</p>
-                <pre>> show collections
+                <pre><code data-language="javascript">> show collections
 elvinlabs
 system.indexes
 testCollection
@@ -255,7 +256,7 @@ true
 > show collections
 elvinlabs
 system.indexes
-></pre>
+></code></pre>
 
             <h3>Datatype list supports by the MongoDB</h3>
             <ul>
@@ -269,8 +270,8 @@ system.indexes
             <h3>The insert() Method</h3>
             <p><b>insert() or save()</b> method is used to insert data to collection in MongoDB</p>
             <p>Example</p>
-            <pre>db.collectionName.insert(Document)</pre>
-            <pre>> db.mydb.insert(
+            <pre><code data-language="javascript">db.collectionName.insert(Document)</code></pre>
+            <pre><code data-language="javascript">> db.mydb.insert(
 {
     title:"learn mongodb",
     description:"this is tutorial for learn mongodb",
@@ -281,14 +282,14 @@ system.indexes
 }
 )
 WriteResult({ "nInserted" : 1 })
-></pre>
+></code></pre>
 
 
             <p>when we insert document into collection ObjectId will be added automaticaly by Mongodb. it is unique for this document.</p>
 
             <p>we can insert multiple documents using insert() method</p>
             <p>Example code</p>
-            <pre>> db.mydb.insert(
+            <pre><code data-language="javascript">> db.mydb.insert(
 {
     title:"mongodb insert methode",
     description:"this is tutorial for learn mongodb",
@@ -316,7 +317,7 @@ WriteResult({ "nInserted" : 1 })
 }
 )
 WriteResult({ "nInserted" : 1 })
-></pre>
+></code></pre>
 
 
             <p>using <b>db.mydb.save(documents)</b> methode we can do same thing</p>
@@ -329,7 +330,7 @@ WriteResult({ "nInserted" : 1 })
             <p><b>db.Collection_NAME.find().pretty()</b> method is used to display documents as structured way.</p>
 
             <p>Example code</p>
-            <pre>
+            <pre><code data-language="javascript">
 > db.mydb.find()
 { "_id" : ObjectId("55f6c357b5aa4dee6cc075bc"), "title" : "learn mongodb", "description" : "this is tutorial for learn mongodb", "writtenBy" : "AjanthaB", "utl" : "ajantha.elvinlabs.com/tutorial", "likes" : 10, "comments" : [ ] }
 { "_id" : ObjectId("55f6c70fb5aa4dee6cc075bd"), "title" : "mongodb insert methode", "description" : "this is tutorial for learn mongodb", "writtenBy" : "AjanthaB", "url" : "ajantha.elvinlabs.com/tutorial", "likes" : 10, "comments" : [ { "user" : "user 1", "msg" : "test msg" } ] }
@@ -359,7 +360,7 @@ WriteResult({ "nInserted" : 1 })
                 }
         ]
 }
-></pre>    
+></code></pre>    
 
 
 
@@ -387,37 +388,58 @@ WriteResult({ "nInserted" : 1 })
                     </tr>
                     <tr>
                         <td>Less Than</td>
-                        <td>{<key>:{$lt:<value>}}</td>
+                        <td>{&ltkey&gt:{$lt:&ltvalue&gt}}</td>
                         <td>db.mydb.find({"likes":{$lt:50}}).pretty()</td>
                         <td>Where likes < 50</td>
                     </tr>
                     <tr>
                         <td>Less Than Equals</td>
-                        <td>{<key>:{$lte:<value>}}</td>
+                        <td>{&ltkey&gt:{$lte:&ltvalue&gt}}</td>
                         <td>db.mydb.find({"likes":{$lte:50}}).pretty()</td>
                         <td>Where likes <= 50</td>
                     </tr>
                     <tr>
                         <td>Greater Than</td>
-                        <td>{<key>:{$gt:<value>}}</td>
+                        <td>{&ltkey&gt:{$gt:&ltvalue&gt}}</td>
                         <td>db.mydb.find({"likes":{$gt:50}}).pretty()</td>
                         <td>Where likes > 50</td>
                     </tr>
                     <tr>
                         <td>Greater Than Equals</td>
-                        <td>{<key>:{$gte:<value>}}</td>
+                        <td>{&ltkey&gt:{$gte:&gtvalue&lt}}</td>
                         <td>db.mydb.find({"likes":{$gte:50}}).pretty()</td>
                         <td>Where likes >= 50</td>
                     </tr>
                     <tr>
                         <td>Not Equals</td>
-                        <td>{<key>:{$ne:<value>}}</td>
+                        <td>{&ltkey&gt:{$ne:&ltvalue&gt}}</td>
                         <td>db.mydb.find({"likes":{$ne:50}}).pretty()</td>
                         <td>Where likes != 50</td>
                     </tr>
                 </tbody>
             </table>
 
+
+            <h3>AND operation in MongoDB</h3>
+            <p>To use AND operation with find() method we should use multiple keys seperating with ','</p>
+            <pre><code data-language="javascript">db.mydb.find({key2:value1},{key2:value2}).pretty()</code></pre>
+            <p>Example using AND operation</p>
+            <pre><code data-language="javascript">
+> db.mydb.find({"writtenBy":"AjanthaB","title":"mongodb insert methode"}).pretty()
+{
+        "_id" : ObjectId("55f6c70fb5aa4dee6cc075bd"),
+        "title" : "mongodb insert methode",
+        "description" : "this is tutorial for learn mongodb",
+        "writtenBy" : "AjanthaB",
+        "url" : "ajantha.elvinlabs.com/tutorial",
+        "likes" : 10,
+        "comments" : [
+                {
+                        "user" : "user 1",
+                        "msg" : "test msg"
+                }
+        ]
+}</code></pre>
 
 
 
@@ -474,6 +496,8 @@ WriteResult({ "nInserted" : 1 })
 
     <!-- Custom Theme JavaScript -->
     <script src="../../js/clean-blog.min.js"></script>
+    <script src="../../js/rainbow-custom.min.js"></script>
+    <script src="../../js/lan/javascript.js"></script>
      
      <script>
       
