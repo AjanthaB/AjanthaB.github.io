@@ -21,13 +21,18 @@ p{
 }
 
 
-/*pre{
+.letf-nav{
 
-  background-color: #272822;
-  color: #d25252;
+	font-size: 20px;
+	list-style: none;
 }
 
+.left-nav li a{
+	margin-left: 0px;
+}
 
-.key-word{
-  color: #66ccb3;
-}*/
+.left-nav li a:hover{
+		color: #0085A1;
+		background-color: #FFF;
+
+}
