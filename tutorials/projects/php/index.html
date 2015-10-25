@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-
+s
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="install Mongodb and basics">
+    <meta name="description" content="php php-examples php-database-connection">
     <meta name="author" content="Ajantha Bandara elvinlabs.com">
 
     <title>AjanthaB</title>
@@ -17,7 +17,7 @@
     <!-- Custom CSS -->
     <link href="../../css/clean-blog.min.css" rel="stylesheet">
     <link href="../../css/clean-blog.css" rel="stylesheet">
-
+    <link href="../../css/themes/monokai.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -72,9 +72,9 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1 style="color:#0085A1;margin-top:-140px;">install MongoDB and Learn basics </h1>
+                        <h1 style="color:#0085A1;margin-top:-140px;">PHP very important things learn easily </h1>
                         
-                        <span class="meta">Posted by <a href="#">AjanthaB</a> on Sep 14, 2015</span>
+                        <span class="meta">Posted by <a href="#">AjanthaB</a> on Oct 23, 2015</span>
                     </div>
                 </div>
             </div>
@@ -91,11 +91,12 @@
 
                         <h3>Other Topics</h3>
                         <li>
-                            <a href="index.html">MongoDB Install</a>
+                            <a href="../MongoDB/">MongoDB</a>
                         </li>
                         <li>
-                            <a href="overview.html">MongoDB Overview</a>
+                            <a href="index.html">PHP</a>
                         </li>
+
                     </ul>  
                 </div>
 
@@ -103,33 +104,107 @@
                 <div class="col-lg-9  col-md-8 ">
                     
 
-                   <p>MongoDB is an open-source document database, and leading NoSQL database. MongoDB is written in c++</p>
-                   <p>MongoDB (from humongous) is a cross-platform document-oriented database. Classified as a NoSQL database, MongoDB eschews the traditional table-based relational database structure in favor of JSON-like documents with dynamic schemas (MongoDB calls the format BSON), making the integration of data in certain types of applications easier and faster. Released under a combination of the GNU Affero General Public License and the Apache License, MongoDB is free and open-source software.</p>
-                    <p class="" style="margin-top:0px;">First of all Download the mongoDB from <a href="https://www.mongodb.org/">www.mongodb.org</a> </p>
+                   <p>PHP(...) </p>
+                   </p>
+                    <p class="" style="margin-top:0px;">In this tutorial you can see the most important things you want, when developing php based project.</a> </p>
 
-                    <h3>Install MongoDB</h3>
+                    <h3 class="text-info">Connect to MYSQL Database using php</h3>
 
                     
-	               <p>double click the setup</p>
-                   
-	               <img src="install_1.jpg" class="img-responsive">
+	            
                     
-                    <p>click Next and install it to specific directory or default directory</p>
+                    <p>in php we normaly define the database names and passwords, because they not going to change</p>
+                    <p>'define.php' file</p>
+                    <pre>
+                    	<code data-language="php">
+&lt?php
+	define("HOST","localhost");
+	define("DBNAME","databaseName");
+	define("UNAME","username");
+	define("PW","password");
+?&gt
+                    		
+                    	</code>
+                    </pre>                        
+                    <p>varible name you can change to what ever you want. When you get this varibles to any other php file you have to <b>require<b> this file (<b class="text-warning">keep in mind don't use include because incluse does not give any error or warning if file is not availabe, but require is give error message if file is not availabe</b>). </p>
+                    
+                    <p>you can require any file like this</p>
+                    <pre>
+                    	<code data-language="php">
+&lt?php
+	require 'define.php';
+?&gt
+                    	</code>
+                    </pre> 
 
-                    <p>Go to that directory and open terminal and type <b>mongod</b></p>
-                    <p>Now mongodb server will start and waiting for connections on port 27017<br></p>
-                    
-                        
-                    <img src="img/server.jpg" class="img-responsive">
-                    
-                    <p>now open another terminal, type <b>mongo</b> and hit the Enter </p>
-                    <p>mongo client will start </p>
-                    <img src="img/client.jpg" class="img-responsive">
-                    <p>installation is finished. </p>
-                        
-      
-                    
+                    <p>Now you can create a connection to to database using bellow example. If thre is a error when conneting to database function will show you relevent error message, if not new connection will return
 
+                    </p>
+                    <p><b>function.php file</b></p>
+                    <pre>
+                    	<code data-language="php">
+&lt?php
+	require 'define.php';
+
+	function getconnection(){
+		$connection = mysqli_connect(HOST,UNAME,PW,DBNAME);
+		if(mysqli_connect_error() ){
+			echo('Failed to connect MYSQL DB  '.mysqli_connect_error() );
+		} else return $connection;
+	}
+	// to get new connection
+	$con = getconnection();
+
+?&gt                    		
+                    	</code>
+                    </pre>   
+      				
+
+      				<h3 class="text-info">Execute simple MYSQL Query</h3>
+      				<p>First we want database connection to execute the query.Next we can execute the query using bellow example</p>
+
+      				<pre>
+      					<code data-language="php">
+&lt?php
+	require 'function.php';
+	$connection = getconnection();
+
+	$query ="your query";
+	// example => $query = "insert into people(name,ssn,address) values('name','12345','Anuradhapura,galnewa')";
+	if($connection->query($query)){
+        	echo "query executed";
+    	}else echo $connection->error;	
+
+?&gt
+      					</code>
+      				</pre>
+
+
+      				<p>or you can define a simple function for that also.</p>
+      				<pre>
+      					<code data-language="php">
+&lt?php
+	function query_execute( $connection, $query){
+		$result = $connection-&gtquery($query);
+		if($result) return $result;
+		else echo $connection-&gterror;
+	}
+?&gt
+      					</code>
+      				</pre>
+
+                  <h3 class="text-info">Image Upload using php</h3>
+                  <h4 class="text-info">Upload single</h4>
+                  <p>To upload a single immage to given directory you can use bellow example</p>
+                  <p>HTML code for upload single image</p>
+                  <pre>
+                  	<code data-language="html">
+    &ltform methode="post" action="index.php" enctype="multipart/form-data" &gt
+    		&ltinput type="file" name="file"&gt
+    		&lt input type="submit" value="upload" &gt
+     &lt/form&gt
+                  	</code>
+                  </pre>
                 </div>
             </div>
         </div>
@@ -182,8 +257,10 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../../js/clean-blog.min.js"></script>
-     <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/functions.js"></script>
+    <script src="../../js/rainbow-custom.min.js"></script>
+    <script src="../../js/lan/php.js"></script>
+    <script src="../../js/lan/html.js"></script>
      <script>
       
     </script>
