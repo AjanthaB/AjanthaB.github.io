@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-s
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -67,12 +67,12 @@ s
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('mongodb.jpg')">
+    <header class="intro-header" style="background-image: url('img/php.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1 style="color:#0085A1;margin-top:-140px;">PHP very important things learn easily </h1>
+                        <h1 style="color:#8A2BE2;margin-top:-140px;">PHP Frequently used things </h1>
                         
                         <span class="meta">Posted by <a href="#">AjanthaB</a> on Oct 23, 2015</span>
                     </div>
@@ -161,7 +161,7 @@ s
       				
 
       				<h3 class="text-info">Execute simple MYSQL Query</h3>
-      				<p>First we want database connection to execute the query.Next we can execute the query using bellow example</p>
+      				<p>First we want database connection to execute the query.Next we can execute the query using this example</p>
 
       				<pre>
       					<code data-language="php">
@@ -194,17 +194,191 @@ s
       				</pre>
 
                   <h3 class="text-info">Image Upload using php</h3>
-                  <h4 class="text-info">Upload single</h4>
-                  <p>To upload a single immage to given directory you can use bellow example</p>
+                  <h4 class="text-info">Upload single image</h4>
+                  <p>To upload a single immage to given directory you can use this example</p>
                   <p>HTML code for upload single image</p>
                   <pre>
                   	<code data-language="html">
-    &ltform methode="post" action="index.php" enctype="multipart/form-data" &gt
-    		&ltinput type="file" name="file"&gt
+    &ltform methode="post" action="index.php" enctype="multipart/form-data"&gt
+    		&ltinput type="file" name="files"&gt
     		&lt input type="submit" value="upload" &gt
      &lt/form&gt
                   	</code>
                   </pre>
+
+                  <p>PHP code for that</p>
+                  <pre>
+                  	<code  data-language="php">
+function image_save($target_dir,$files){
+    $target_file = $target_dir . basename($_FILES["files"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+    // Check if image file is a actual image or fake image
+    
+        $check = getimagesize($_FILES["files"]["tmp_name"]);
+        if($check !== false) {
+            //echo "File is an image - " . $check["mime"] . ".";
+            $uploadOk = 1;
+        } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
+        }
+    
+    // Check if file already exists
+    if (file_exists($target_file)) {
+        echo "Sorry, file already exists.";
+        $uploadOk = 0;
+    }
+    // Check file size
+    if ($_FILES["files"]["size"] > 5145728) {
+        echo "Sorry, your file is too large.";
+        $uploadOk = 0;
+    }
+    // Allow certain file formats
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+    && $imageFileType != "gif" ) {
+        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $uploadOk = 0;
+    }
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+    // if everything is ok, try to upload file
+    } else {
+        if (move_uploaded_file($_FILES["files"]["tmp_name"], $target_file)) {
+            echo "The file ". basename( $_FILES["files"]["name"]). " has been uploaded.";
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+        }
+    }
+    if($uploadOk != 0) return $_FILES["files"]["name"];
+    else return "";
+    
+    
+}
+                  	</code>	
+                  </pre>
+
+                  <h4 class="text-info">Upload multiple images</h4>
+                  <p>for that you have to use array to pass all details about images</p>
+                  <pre>
+                  	<code data-language="html">
+    &ltform methode="post" action="index.php" enctype="multipart/form-data"&gt
+    		&ltinput type="file" name="files[]"&gt
+    		&lt input type="submit" value="upload" &gt
+     &lt/form&gt
+                  	</code>
+                  </pre>
+
+                  <p>In this function not going to check image type anymore. If images sucessfuly stored in directory function will return path for images, otherwise will send error message</p>
+                  <pre>
+                  	<code data-language="php">
+ // in here we give three inputs
+ // filles array, desired directory for store the images and derectory name for store the images
+ // ex= > save_img( $files,  '/img/','image1');
+
+function save_img( $files,  $desired_dir,$dir_name){
+        $errors = array();
+        $images ="";
+        $count = 0;
+        
+        foreach($_FILES['files']['tmp_name'] as $key => $tmp_name ){
+            $file = explode(".",$key.$_FILES['files']['name'][$key]);
+            $file_name =$dir_name."-".$count.".".end($file);
+            //print($file_name);
+            $count++;
+            $file_size =$_FILES['files']['size'][$key];
+            $file_tmp =$_FILES['files']['tmp_name'][$key];
+            $file_type=$_FILES['files']['type'][$key];
+                                        
+            $img_path = $desired_dir.'/'.$file_name;                                   
+            $images = $images.",".$img_path;
+            
+            if($file_size > 5145728){
+                $errors[]='File size must be less than 5 MB';
+            }
+          
+            
+            if(empty($errors)==true){
+                if(is_dir($desired_dir)==false){
+                    mkdir("$desired_dir", 0754);		// Create directory if it does not exist
+                }
+                if(is_dir("$desired_dir/".$file_name)==false){
+                    move_uploaded_file($file_tmp,"$desired_dir/".$file_name);
+                }else{									// rename the file if another one exist
+                    $new_dir="$desired_dir/".$file_name.time();
+                    rename($file_tmp,$new_dir) ;				
+                }
+                	
+                
+            }else{
+                print_r($errors);
+            }
+            
+            return $img_path;
+        }
+                                
+        if(empty($error)){
+            echo "Success";
+            return true;
+        }else return false;            
+  
+    }  
+                  	</code>
+                  </pre>
+
+
+
+               <h4 class="text-info">Simple Login logout script</h4>
+               
+               <p>login.php file is used to keep session for users. for session key we have to use unique value for each user. As example lets think we have user_id for each user.using that we can keep session for each user.we take details as username and password. in database password is stored as md5 coverted password in this example. it can be change acording to your project</p>
+
+               <pre>
+               	<code data-language="html">
+ &ltform  action="index.php" method="post"&gt
+      &ltinput  placeholder="uname" name="uname" type="text" autofocus&gt              
+      &ltinput  placeholder="Password" name="password" type="password" value=""&gt
+      &ltinput class="form-control" name="login" type="submit" value="Login"&gt
+ &lt/form&gt  
+               	</code>
+               </pre>   
+
+               <p>PHP script for check user_id. If thre is a session for user_id then redirect to relevent directory. if not redirecto to login page again.</p>
+
+               <pre>
+               		<code data-language="php">
+&lt?php
+    session_start();
+    if(isset($_SESSION['user_id'])!="")
+    {
+        header("Location:../home/");
+    }                   
+?&gt
+               		</code>
+               </pre>
+
+
+               <p>If post came</p>
+               <pre>
+               		<code data-language="php">
+&lt?php
+  if($_POST){  
+        require "define.php";
+        $conn = connection();
+        $uname = mysqli_real_escape_string($conn,$_POST['uname']);
+        $upass = mysqli_real_escape_string($conn,$_POST['password']);
+        $query="SELECT * FROM Users WHERE username='$uname'";
+        $result = $conn->query($query);
+        $row = $result->fetch_assoc();                             
+        if($row['Password']==md5($upass) ){
+            $_SESSION['user_id'] = $row['user_id'];
+            header("Location: ../home/"); 
+        }else print("wrong details"); 
+    }
+?&gt
+               		</code>
+               </pre>
+
                 </div>
             </div>
         </div>
