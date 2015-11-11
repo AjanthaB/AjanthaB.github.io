@@ -67,14 +67,14 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('img/php.jpg')">
+    <header class="intro-header" style="background-image: url('img/post-bg.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="post-heading">
-                        <h1 style="color:#8A2BE2;margin-top:-140px;">Servlet & JSP </h1>
+                    <div class="post-heading" style="text-align:center;">
+                        <h1 style="color:#FF0000;">Servlet & JSP </h1>
                         
-                        <span class="meta">Posted by <a href="#">AjanthaB</a> on Oct 23, 2015</span>
+                        <span class="meta" style="color:#FF0000;">Posted by <a href="#">AjanthaB</a> on Oct 23, 2015</span>
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
 
                    <p>Servlet & JSP </p>
                    </p>
-                    <p class="" style="margin-top:0px;">In this tutorial i'am going to show you how Servlet and JSP work. I used eclips mars as my ide, servlet version 2.5 and tomcat 6.0.41 as web container. Install these tools in your computer</a> </p>
+                    <p class="" style="margin-top:0px;">In this tutorial i'am going to show you how Servlet and JSP work. I used eclips mars as my ide, servlet version 2.5 and <a href="https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.41/bin/apache-tomcat-6.0.41.tar.gz">tomcat 6.0.41</a> as web container. Install these tools in your computer</a> </p>
 
                    
 
@@ -129,45 +129,59 @@
 
                     <p>Now add this line to your index.html file and save it.</p>
                     <img src="img/Selection_006.png" alt="">
+
+
+                    <p>Let see how this work. Right click on the project and select <b>Run As &gt Run on Server</b>. Now you can see the output.</p>
+                    <img src="img/Selection_010.png" alt="">
+                    <p>Do you know how is this working?. Lets open the web.xml file and see.</p>
+                    <img src="img/Selection_011.png" alt=""><br>
+
+                    <p>In the xml file you can see tha tag <b>&ltwelcome-file-list&gt</b>. This tag used to load the welcome file of our project. The tag <b>&ltwelcome-file&gt</b> is used to specify the file. Welcome file will load acording to the declaration of the welcome-file-list. First it will load index.html (index.htm is same as index.html file) file if it is not there index.jsp file will load.Acording to that it will check all files in the welcome-file-list  </p>
+
+
+
+
+
+
                     <p>Now again Right on the project and select <b>New &gt Servlet</b>. After that a new window will pop-up. Now give package name and Servlet name as you Wish, click Next.In this window you can select a path.When you type this path after context path( your project name) This servlet will invoke acording to your request(Get or Post).</p>
                     <img src="img/Create Servlet _007.png" alt="">
 
                     <p>This is the TestServlet.java class.</p>
                     <img src="img/Selection_009.png" alt="">
 
-
-         	
-
-            
+                    <p>When Get request came to Servlet <b>doGet()</b> will invoke. It takes two arguments <b>httpServletRequest and httpServletResponse. Edit the last line of the doGet method and save it.</b></p>
 
 
-
-
-
-
-
-
+        
 
 
                <pre>
-               		<code data-language="php">
-&lt?php
-  if($_POST){  
-        require "define.php";
-        $conn = connection();
-        $uname = mysqli_real_escape_string($conn,$_POST['uname']);
-        $upass = mysqli_real_escape_string($conn,$_POST['password']);
-        $query="SELECT * FROM Users WHERE username='$uname'";
-        $result = $conn->query($query);
-        $row = $result->fetch_assoc();                             
-        if($row['Password']==md5($upass) ){
-            $_SESSION['user_id'] = $row['user_id'];
-            header("Location: ../home/"); 
-        }else print("wrong details"); 
-    }
-?&gt
+               		<code data-language="java">
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.getWriter().append("Hello world").append(request.getContextPath());
+		
+}
+
                		</code>
                </pre>
+
+
+               <p>Now open the web.xml file see whats newly added. </p>
+               <img src="img/Selection_012.png" alt="">
+               <p>When request come with url-pattern like <b>/TestServlet</b> this &ltservlet-mapping&gt will map the relevent servlet according to &ltservlet-name&gt tag in &ltservlet&gt tag. Acording to the Servlet name Servlet class will map in here request is send to <b>com.ajantha.TestServlet</b> class.<br>
+               Now add this line to your index.html file.</p>
+               
+               <img src="img/Selection_013.png" alt=""><br>
+
+               <p> Lets run this this programe. Click the button on the option panel in eclips. you can see the result like this. This is comming from your Servlet. Wow nice it's working. What happens if some one send <b>Post</b> request to servlet, in here same this happen because doPost() method again call to doGet() method. If we want do something diffrent you can implement it there. </p>
+               <img src="img/Selection_015.png" alt="">
+                 
+
+               <p>Next example i will show you how submit a form to servlet and get response from servlet. Thank you.</p>
+            
+
+
 
                 </div>
             </div>
@@ -223,7 +237,7 @@
     <script src="../../js/clean-blog.min.js"></script>
     <script src="js/functions.js"></script>
     <script src="../../js/rainbow-custom.min.js"></script>
-    <script src="../../js/lan/php.js"></script>
+    <script src="../../js/lan/java.js"></script>
     <script src="../../js/lan/html.js"></script>
      <script>
       
