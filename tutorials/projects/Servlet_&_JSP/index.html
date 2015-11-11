@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Servlet and JSP-examples ,Servlet Filter and RequestDispacher">
+    <meta name="author" content="Ajantha Bandara elvinlabs.com">
+
+    <title>AjanthaB</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/clean-blog.min.css" rel="stylesheet">
+    <link href="../../css/clean-blog.css" rel="stylesheet">
+    <link href="../../css/themes/monokai.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+ 
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../index.html">AjanthaB</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="http://ajantha.elvinlabs.com/">About</a>
+                    </li>
+                   <!--  <li>
+                        <a href="post.html">Sample Post</a>
+                    </li> -->
+                    <li>
+                        <a href="http://ajantha.elvinlabs.com/">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('img/php.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1 style="color:#8A2BE2;margin-top:-140px;">Servlet & JSP </h1>
+                        
+                        <span class="meta">Posted by <a href="#">AjanthaB</a> on Oct 23, 2015</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-3">
+                    <ul class="left-nav">
+
+                        <h3>Other Topics</h3>
+                        <li>
+                            <a href="../MongoDB/">MongoDB</a>
+                        </li>
+                        <li>
+                            <a href="index.html">PHP</a>
+                        </li>
+                        <li>
+                            <a href="index.html">Servlet & JSP</a>
+                        </li>
+
+                    </ul>  
+                </div>
+
+
+                <div class="col-lg-9  col-md-8 ">
+                    
+
+                   <p>Servlet & JSP </p>
+                   </p>
+                    <p class="" style="margin-top:0px;">In this tutorial i'am going to show you how Servlet and JSP work. I used eclips mars as my ide, servlet version 2.5 and tomcat 6.0.41 as web container. Install these tools in your computer</a> </p>
+
+                   
+
+                    
+	            
+                    
+                    <p>Open the eclips and click <b>File &gt new &gt Dynamic Web Project</b>. This window will appear. </p>
+                    <img src="img/New Dynamic Web Project _001.png" alt="">
+                    <p>Select a name for the project.My project is ServletTest. next <b>Click &gt New Runtime</b> and select tomcat version as 6. now add the path to tomcat directory and click finish.</p>
+                    <img src="img/New Server Runtime Environment _003.png" alt="">
+
+                                          
+                    <p>Now click the finish again.This is the folder structure of the project that you have created. WebContainer folder keep the all html, JSP, js, css and images in your project.Later i'll explain about web.xml file. Src folder keep the all java files in your project. </p>
+                     <img src="img/Selection_004.png" alt="">
+                    <p>Now Right click on the project go to <b>New &gt HTML file</b> and select a name as index.html, click finish.</p>
+                    <img src="img/New HTML File _005.png" alt="">
+
+                    <p>Now add this line to your index.html file and save it.</p>
+                    <img src="img/Selection_006.png" alt="">
+                    <p>Now again Right on the project and select <b>New &gt Servlet</b>. After that a new window will pop-up. Now give package name and Servlet name as you Wish, click Next.In this window you can select a path.When you type this path after context path( your project name) This servlet will invoke acording to your request(Get or Post).</p>
+                    <img src="img/Create Servlet _007.png" alt="">
+
+                    <p>This is the TestServlet.java class.</p>
+                    <img src="img/Selection_009.png" alt="">
+
+
+         	
+
+            
+
+
+
+
+
+
+
+
+
+
+               <pre>
+               		<code data-language="php">
+&lt?php
+  if($_POST){  
+        require "define.php";
+        $conn = connection();
+        $uname = mysqli_real_escape_string($conn,$_POST['uname']);
+        $upass = mysqli_real_escape_string($conn,$_POST['password']);
+        $query="SELECT * FROM Users WHERE username='$uname'";
+        $result = $conn->query($query);
+        $row = $result->fetch_assoc();                             
+        if($row['Password']==md5($upass) ){
+            $_SESSION['user_id'] = $row['user_id'];
+            header("Location: ../home/"); 
+        }else print("wrong details"); 
+    }
+?&gt
+               		</code>
+               </pre>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+   <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../../js/clean-blog.min.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="../../js/rainbow-custom.min.js"></script>
+    <script src="../../js/lan/php.js"></script>
+    <script src="../../js/lan/html.js"></script>
+     <script>
+      
+    </script>
+
+</body>
+
+</html>
