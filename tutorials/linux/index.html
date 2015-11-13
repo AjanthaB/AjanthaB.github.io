@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="install Mongodb and basics">
+    <meta name="author" content="Ajantha Bandara elvinlabs.com">
+
+    <title>AjanthaB</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../css/clean-blog.min.css" rel="stylesheet">
+    <link href="../css/clean-blog.css" rel="stylesheet">
+    <link href="../css/themes/monokai.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+ 
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../index.html">AjanthaB</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="http://ajantha.elvinlabs.com/">About</a>
+                    </li>
+                   <!--  <li>
+                        <a href="post.html">Sample Post</a>
+                    </li> -->
+                    <li>
+                        <a href="http://ajantha.elvinlabs.com/">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('../img/home-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1 style="color:#fff;margin-top:-140px;">Things Have To Do After Install Ubuntu 15.04 </h1>
+                        
+                        <span class="meta">Posted by <a href="#">AjanthaB</a> on Oct 12, 2015</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-3">
+                    <ul class="left-nav">
+
+                        <h3>Other Topics</h3>
+                        <li>
+                            <a href="index.html">Install Basic Things</a>
+                        </li>
+                        <li>
+                            <a href="tools.html">Install Developer Tools</a>
+                        </li>
+                    </ul>  
+                </div>
+
+
+                <div class="col-lg-9  col-md-8 ">
+                    
+
+                   <p>After Install the Ubuntu 15.04 for your computer</p>
+                  
+
+                    <h3>Update & Upgrade</h3>
+
+                    
+                   <p>First you should update your ubuntu using this command</p>
+                   <pre>
+                       <code data-language="javascript">
+    sudo apt-get update;                           
+                     </code>
+                   </pre>
+                   
+                   <p>Next you can upgrade your ubuntu os using this command</p>
+                     <pre>
+                       <code data-language="javascript">
+    sudo apt-get upgrade;                           
+                     </code>
+                   </pre>
+
+                   
+
+                    <h3>Install Numix theme and icons in Ubuntu</h3>
+                    <p>We’ll be using the official Numix PPA. Open a terminal (Ctrl+Alt+T in Ubuntu) and use the following commands to install Numix theme and icons:</p>
+
+                    <pre>
+                        <code data-language="javascript">
+    sudo add-apt-repository ppa:numix/ppa
+    sudo apt-get update
+    sudo apt-get install numix-gtk-theme numix-icon-theme-circle
+                        </code>
+                    </pre>
+                    <p>If you want to install Numix wallpapers, use the command below:</p>
+                    <pre>
+                        <code data-language="javascript">
+    sudo apt-get install numix-wallpaper-*
+                        </code>
+                    </pre>
+
+
+                    <p>Now we are going to give attractive interface to ubuntu. We can install themes for ubuntu. Before tha install the Unity-tweak tool using this command.</p>
+                     <pre>
+                       <code data-language="javascript">
+    sudo apt-get install unity-tweak-tool;                           
+                     </code>
+                   </pre>
+
+                    <h3>Using Numix theme and icons</h3>
+                    <p>Open the Unity-teeak tool and select <b>Themes</b></p>
+                   <img src="img/Unity Tweak Tool_001.png" class="img-responsive">
+                   <p>Now Select the <b>Numix daily</b>.</p>
+                   <img src="img/Selection_002.png" class="img-responsive">
+                   <p>Next click the <b>icons</b> tab select <b>Numix-circle</b></p>
+                   <img src="img/Unity Tweak Tool_003.png" class="img-responsive">
+                   <p>And reduce text-scaling factor to 0.80 using <b>Fonts</b> tab</p>
+                   <img src="img/Selection_004.png" class="img-responsive">
+
+                   <p>Now you can see your application launcher is looks like this(This image is a rotated one to show easily)</p>
+                   <img src="img/unity-launcher_005.png" class="img-responsive">
+                   <p>Your menu looks like this.</p>
+                   <img src="img/Screen.png" class="img-responsive">
+
+                   <p>yah it's look grate.</p>
+
+                   <p>If ypu want another themes add these themes see.</p>
+
+                   <pre>
+                       <code data-language="javascript">
+ sudo add-apt-repository ppa:numix/ppa
+ sudo apt-get update
+ sudo apt-get install numix-icon-theme-shine
+
+
+
+ sudo add-apt-repository ppa:numix/ppa
+ sudo apt-get update
+ sudo apt-get install numix-icon-theme-utouch
+
+
+ sudo add-apt-repository ppa:moka/stable
+sudo apt-get update
+sudo apt-get install moka-icon-theme
+                          
+                     </code>
+                   </pre>
+                    
+                    
+                   <p><a href="tools.html">Next tutorial</a> i'am goona show you how install development tools in linux ubuntu.</p>
+                   <p>Thank you.</p>
+      
+                    
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+   <!-- jQuery -->
+    <script src="../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../js/clean-blog.min.js"></script>
+     <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+     <script src="../js/lan/shell.js" type="text/javascript" charset="utf-8"></script>
+     <script src="../js/lan/javascript.js" type="text/javascript" charset="utf-8"></script>
+   
+     <script>
+      
+    </script>
+
+</body>
+
+</html>
