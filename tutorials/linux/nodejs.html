@@ -6,26 +6,23 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="install Mongodb and basics">
-    <meta name="author" content="Ajantha Bandara elvinlabs.com">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <title>AjanthaB</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../css/clean-blog.min.css" rel="stylesheet">
-    <link href="../css/clean-blog.css" rel="stylesheet">
-    <link href="../css/themes/monokai.css" rel="stylesheet">
+    <link href="css/clean-blog.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
- 
-
+    <link href="css/clean-blog.css" rel="stylesheet">
 </head>
 
 <body>
@@ -41,7 +38,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.html">AjanthaB</a>
+                <a class="navbar-brand" href="index.html">AjanthaB</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -53,8 +50,8 @@
                     <li>
                         <a href="http://ajantha.elvinlabs.com/">About</a>
                     </li>
-                   <!--  <li>
-                        <a href="post.html">Sample Post</a>
+                    <!-- <li>
+                        <a href="projects/MongoDB/index.html">MongoDB</a>
                     </li> -->
                     <li>
                         <a href="http://ajantha.elvinlabs.com/">Contact</a>
@@ -68,109 +65,111 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('../img/home-bg.jpg')">
+    <header class="intro-header" style="background-image: url('img/home-bg.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="post-heading">
-                        <h1 style="color:#fff;margin-top:-140px;">Things Have To Do After Install Ubuntu 15.04 </h1>
-                        
-                        <span class="meta">Posted by <a href="#">AjanthaB</a> on Oct 12, 2015</span>
+                    <div class="site-heading">
+                        <h1></h1>
+                        <hr class="small">
+                        <span class="subheading">New Technology with Modern World</span>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Post Content -->
-    <article>
-        <div class="container">
-            <div class="row">
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
 
-                <div class="col-lg-3 col-md-3">
+
+
+            <div class="col-lg-3 col-md-3 col-sm-3 left-topics">
+                    <h3>Tutorials</h3>
                     <ul class="left-nav">
-
-                        <h3>Other Topics</h3>
-                        <li>
+                         <li>
                             <a href="index.html">Install Basic Things</a>
+                        </li>
+                        <li>
+                            <a href="java.html">Install Java</a>
+                        </li>
+                        <li>
+                            <a href="nodejs.html">Install Node.js and Frameworks</a>
                         </li>
                         <li>
                             <a href="tools.html">Install Developer Tools</a>
                         </li>
-                    </ul>  
+                        <li>
+                            <a href="database.html">Install Databases</a>
+                        </li>
+                    </ul>
+            </div>
+
+
+
+            <div class="col-lg-9 col-md-9 col-sm-9 ">
+
+                <h2>Posts</h2>
+
+                <div class="post-preview">
+                    <a href="projects/MongoDB/">
+                        <h2 class="post-title">
+                           Learn MongoDB basics Easily
+                        </h2>
+                        <h3 class="post-subtitle">
+                            MongoDb
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by <a href="#">AjanthaB</a> on Sep 20, 2015</p>
                 </div>
 
-
-                <div class="col-lg-9  col-md-8 ">
-                    
-
-                   <p>After Install the Ubuntu 15.04 for your computer</p>
-                  
-
-                    <h3>Install java on your computer</h3>
-
-                    
-                   <p>Install oracle java 6 using PPA command</p>
-                   <pre>
-                       <code data-language="javascript">
-    sudo add-apt-repository ppa:webupd8team/java
-    sudo apt-get update
-    sudo apt-get install oracle-java6-installer                           
-                     </code>
-                   </pre>
-
-                    <p>Install oracle java 7 using PPA command</p>
-                   <pre>
-                       <code data-language="javascript">
-    sudo add-apt-repository ppa:webupd8team/java
-    sudo apt-get update
-    sudo apt-get install oracle-java7-installer                           
-                     </code>
-                   </pre>
-
-
-
-
-                    <p>Install oracle java 8 using PPA command</p>
-                   <pre>
-                       <code data-language="javascript">
-    sudo add-apt-repository ppa:webupd8team/java
-    sudo apt-get update
-    sudo apt-get install oracle-java8-installer                           
-                     </code>
-                   </pre>
-
-                   <p>You JVM directory is <b>/usr/lib/jvm/java-&ltversion&gt-oracle/</b> </p>
-                   <p>Now you can add your enviroments variable JAVA_HOME and JRE_HOME. First open the terminal type this command. you will document with PATH varible.</p>
-                   
-                   <pre>
-                       <code data-language="javascript">
-    sudo gedit /etc/enviroments                           
-                     </code>
-                   </pre>
-                   <p>Add these two lines and add <b>$JAVA_HOME and $JRE_HOME</b> at theend of the <b>PATH</b> save it.</p>
-                   <pre>
-                       <code data-language="javascript">
-    JAVA_HOME="/usr/lib/jvm/java-8-oracle"
-    JRE_HOME="/usr/lib/jvm/java-8-oracle/jre"
-    PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$JAVA_HOME:$JRE_HOME"
-                     </code>
-                   </pre>
-
-
-                   <p>Download <a href="soft/apache-tomcat-6.0.37.tar.gz">tomcat-6</a></p>
-                  
-                    
-                    
-                   <p><a href="tools.html">Next tutorial</a> i'am goona show you how install development tools in linux ubuntu.</p>
-                   <p>Thank you.</p>
-      
-                    
-
+                <div class="post-preview">
+                    <a href="projects/Yocto image/">
+                        <h2 class="post-title">
+                           Building-a-Yocto-image-for-Galileo-Gen-2-bord
+                        </h2>
+                        <h3 class="post-subtitle">
+                            Intel Galileo Gen 2 Board
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by <a href="#">AjanthaB</a> on July 25, 2015</p>
                 </div>
+
+                <div class="post-preview">
+                    <a href="projects/Home Security System/">
+                        <h2 class="post-title">
+                            Home Security System
+                        </h2>
+                        <h3 class="post-subtitle">
+                            Intel Galileo Gen 2 Board
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by <a href="#">AjanthaB</a> on July 15, 2015</p>
+                </div>
+                 <div class="post-preview">
+                    <a href="projects/Opencv/">
+                        <h2 class="post-title">
+                            install OpenCV on already build yocto_image using Intel Gelileo Gen 2
+                        </h2>
+                        <h3 class="post-subtitle">
+                            Intel Galileo Gen 2 Board
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by <a href="#">AjanthaB</a> on Augusts 5, 2015</p>
+                </div>
+                <hr>
+
+
+                <!-- Pager -->
+                <!-- <ul class="pager">
+                    <li class="next">
+                        <a href="#">Older Posts &rarr;</a>
+                    </li>
+                </ul> -->
             </div>
         </div>
-    </article>
+    </div>
 
     <hr>
 
@@ -197,7 +196,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="https://github.com/AjanthaB">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -211,21 +210,14 @@
         </div>
     </footer>
 
-   <!-- jQuery -->
-    <script src="../js/jquery.js"></script>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="../js/clean-blog.min.js"></script>
-     <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-     <script src="../js/lan/shell.js" type="text/javascript" charset="utf-8"></script>
-     <script src="../js/lan/javascript.js" type="text/javascript" charset="utf-8"></script>
-   
-     <script>
-      
-    </script>
+    <script src="js/clean-blog.min.js"></script>
 
 </body>
 
