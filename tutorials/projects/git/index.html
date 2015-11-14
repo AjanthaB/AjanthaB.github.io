@@ -17,6 +17,7 @@
     <!-- Custom CSS -->
     <link href="../../css/clean-blog.min.css" rel="stylesheet">
     <link href="../../css/clean-blog.css" rel="stylesheet">
+    <link href="../../css/themes/monokai.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -24,6 +25,11 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
  
+    
+     <!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="../../../favicon.png" >
+
 
 </head>
 
@@ -67,12 +73,12 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('mongodb.jpg')">
+    <header class="intro-header" style="background-image: url('img/download.png')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1 style="color:#0085A1;margin-top:-140px;">install MongoDB and Learn basics </h1>
+                        <h1 style="color:#0085A1;margin-top:-140px;">Git Tutorials </h1>
                         
                         <span class="meta">Posted by <a href="#">AjanthaB</a> on Sep 14, 2015</span>
                     </div>
@@ -101,33 +107,66 @@
 
 
                 <div class="col-lg-9  col-md-8 ">
+               
+                             
+                    <p>It is a widely used version control system for software development. It is a distributed revision control system with an emphasis on speed, data integrity, and support for distributed, non-linear workflows. Git was initially designed and developed by Linus Torvalds for Linux kernel development in 2005.</p>
                     
+                    <h3>Install Git for Debian/Ubuntu</h3> 
+                    <pre>
+                        <code data-language="javascript">
+   sudo apt-get install git
+                        </code>
+                    </pre>
+                    <p>if you want git GUI Client for linux you can <a href="https://git-scm.com/downloads/guis">download</a> here</p>
 
-                   <p>MongoDB is an open-source document database, and leading NoSQL database. MongoDB is written in c++</p>
-                   <p>MongoDB (from humongous) is a cross-platform document-oriented database. Classified as a NoSQL database, MongoDB eschews the traditional table-based relational database structure in favor of JSON-like documents with dynamic schemas (MongoDB calls the format BSON), making the integration of data in certain types of applications easier and faster. Released under a combination of the GNU Affero General Public License and the Apache License, MongoDB is free and open-source software.</p>
-                    <p class="" style="margin-top:0px;">First of all Download the mongoDB from <a href="https://www.mongodb.org/">www.mongodb.org</a> </p>
+                    <h3>Install Git for Fedora</h3>
+                    <pre>
+                        <code data-language="javascript">
+   yum install git
+                        </code>
+                    </pre>
+                    
+                    <h3>Install Git for Arch Linux</h3>
+                    <pre>
+                        <code data-language="javascript">
+   pacman -S git
+                        </code>
+                    </pre>
+                    
+                    <h3>Install Git for openSUSE</h3>
+                    <pre>
+                        <code data-language="javascript">
+   zypper install git
+                        </code>
+                    </pre>
+                    
+                    
+                    <h3>CONFIGURE TOOLING</h3>
+                    <p>Configure user information for all local repositories<br>
+                    Sets the name you want atached to your commit transactions</p>
+                    <pre>
+                        <code data-language="javascript">
+   git config --global user.name "[name]"
+                        </code>
+                    </pre>
+                    
+                    <p>Sets the email you want atached to your commit transactions</p>
+                     <pre>
+                        <code data-language="javascript">
+   git config --global user.email "[email address]"
+                        </code>
+                    </pre>
+                    
+                    <p>Enables helpful colorization of command line output</p>
+                    <pre>
+                        <code data-language="javascript">
+  git config --global color.ui auto
+                        </code>
+                    </pre>
 
-                    <h3>Install MongoDB</h3>
-
                     
-	               <p>double click the setup</p>
-                   
-	               <img src="install_1.jpg" class="img-responsive">
+            
                     
-                    <p>click Next and install it to specific directory or default directory</p>
-
-                    <p>Go to that directory and open terminal and type <b>mongod</b></p>
-                    <p>Now mongodb server will start and waiting for connections on port 27017<br></p>
-                    
-                        
-                    <img src="img/server.jpg" class="img-responsive">
-                    
-                    <p>now open another terminal, type <b>mongo</b> and hit the Enter </p>
-                    <p>mongo client will start </p>
-                    <img src="img/client.jpg" class="img-responsive">
-                    <p>installation is finished. </p>
-                        
-      
                     
 
                 </div>
@@ -181,11 +220,12 @@
     <script src="../../js/bootstrap.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="../../js/clean-blog.min.js"></script>>
-    <script src="js/functions.js"></script>
-     <script>
-      
-    </script>
+    <script src="../../js/clean-blog.min.js"></script>
+    
+    <script src="../../js/rainbow-custom.min.js"></script>
+    <script src="../../js/lan/javascript.js"></script>
+    
+    
 
 </body>
 

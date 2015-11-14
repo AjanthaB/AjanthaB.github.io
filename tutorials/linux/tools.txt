@@ -1,0 +1,19 @@
+Install Brackets in ubuntus
+
+sudo add-apt-repository ppa:webupd8team/brackets
+sudo apt-get update
+sudo apt-get install brackets
+
+remove brackets
+sudo apt-get remove brackets
+
+
+Install node.js
+
+sudo apt-get update
+sudo apt-get install nodejs
+sudo apt-get install npm
+sudo apt-get install nvm
+
+
+https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server

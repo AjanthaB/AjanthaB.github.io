@@ -17,6 +17,7 @@
     <!-- Custom CSS -->
     <link href="../../css/clean-blog.min.css" rel="stylesheet">
     <link href="../../css/clean-blog.css" rel="stylesheet">
+    <link href="../../css/themes/monokai.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -24,6 +25,9 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
  
+    
+    <script src="js/knockout-3.3.0.js"></script>
+
 
 </head>
 
@@ -72,7 +76,7 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1 style="color:#0085A1;margin-top:-140px;">install MongoDB and Learn basics </h1>
+                        <h1 style="color:#0085A1;margin-top:-140px;">Knockout.js Tutorials </h1>
                         
                         <span class="meta">Posted by <a href="#">AjanthaB</a> on Sep 14, 2015</span>
                     </div>
@@ -101,33 +105,80 @@
 
 
                 <div class="col-lg-9  col-md-8 ">
+               
+                             
+                    <p>To create a view model with KO, just declare any JavaScript object. For example</p>
+                    <pre>
+                        <code data-language="javascript">
+    var personViewModel = {
+        personName : "Ajantha",
+        personAge :24
+    };
+                        </code>
+                    </pre>
                     
-
-                   <p>MongoDB is an open-source document database, and leading NoSQL database. MongoDB is written in c++</p>
-                   <p>MongoDB (from humongous) is a cross-platform document-oriented database. Classified as a NoSQL database, MongoDB eschews the traditional table-based relational database structure in favor of JSON-like documents with dynamic schemas (MongoDB calls the format BSON), making the integration of data in certain types of applications easier and faster. Released under a combination of the GNU Affero General Public License and the Apache License, MongoDB is free and open-source software.</p>
-                    <p class="" style="margin-top:0px;">First of all Download the mongoDB from <a href="https://www.mongodb.org/">www.mongodb.org</a> </p>
-
-                    <h3>Install MongoDB</h3>
-
+                    <p>You can then create a very simple view of this view model using a declarative binding. For example, the following markup displays the personName value:</p>
+                    <pre>
+                        <code data-language="javascript">
+    The name is &ltspan&gt data-bind="text: personName">&lt/span&gt
+                        </code>
+                    </pre>
                     
-	               <p>double click the setup</p>
-                   
-	               <img src="install_1.jpg" class="img-responsive">
+                    <h4>Activating Knockout</h4>
+                    <p>The <b>data-bind</b> attribute isn’t native to HTML, though it is perfectly OK (it’s strictly compliant in HTML 5, and causes no problems with HTML 4 even though a validator will point out that it’s an unrecognized attribute). But since the browser doesn’t know what it means, you need to activate Knockout to make it take effect.</p>
                     
-                    <p>click Next and install it to specific directory or default directory</p>
-
-                    <p>Go to that directory and open terminal and type <b>mongod</b></p>
-                    <p>Now mongodb server will start and waiting for connections on port 27017<br></p>
+                    <p>To activate Knockout, add the following line to a &ltscript&gt block.</p>
+                     <pre>
+                        <code data-language="javascript">
+     ko.applyBindings(personViewModel);
+                        </code>
+                    </pre>
+                    <p class="text-info">The name is <span data-bind="text: personName"></span></p><br>
                     
+                    
+                    <p>In case you’re wondering what the parameters to <b class="text-info">ko.applyBindings</b> do,</p>
+                    
+                    <p>The first parameter says what view model object you want to use with the declarative bindings it activates</p>
+                    <p>Optionally, you can pass a second parameter to define which part of the document you want to search for data-bind attributes. For example, ko.applyBindings(myViewModel, document.getElementById('someElementId')). This restricts the activation to the element with ID someElementId and its descendants, which is useful if you want to have multiple view models and associate each with a different region of the page.</p>
+                    
+                    
+                    <script>
+                        var personViewModel = {
+                            personName : "Ajantha",
+                            personAge :24
+                        };
+                        ko.applyBindings(personViewModel);
+                    </script>
+                    
+                    <h3>Observables</h3>
+                    <p>OK, you’ve seen how to create a basic view model and how to display one of its properties using a binding. But one of the key benefits of KO is that it updates your UI automatically when the view model changes. How can KO know when parts of your view model change? Answer: you need to declare your model properties as observables, because these are special JavaScript objects that can notify subscribers about changes, and can automatically detect dependencies</p>
+                    
+                    <p>For example, rewrite the preceding view model object as follows</p>
+                    <pre>
+                        <code data-language="javascript">
+    var observableViewModel = {
+        observableName : ko.observable("Ajantha"),
+        observableAge :ko.observable(24),
+        
+    };
+                        </code>
+                    </pre>
+                    
+                    Name : <input data-bind="value:observableName"/><br>
+                    Age : <input data-bind="value :observableAge"/><br>
+<!--                    Chage : <input data-bind="value:observableChange"/>-->
+                    <script>
+                              
+                     var observableViewModel = {
+                        observableName : ko.observable("Ajantha"),
+                        observableAge :ko.observable(24)
+                     };
+                    
+                     ko.applyBindings(observableViewModel);
                         
-                    <img src="img/server.jpg" class="img-responsive">
                     
-                    <p>now open another terminal, type <b>mongo</b> and hit the Enter </p>
-                    <p>mongo client will start </p>
-                    <img src="img/client.jpg" class="img-responsive">
-                    <p>installation is finished. </p>
-                        
-      
+                    </script>
+                    
                     
 
                 </div>
@@ -181,11 +232,12 @@
     <script src="../../js/bootstrap.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="../../js/clean-blog.min.js"></script>>
-    <script src="js/functions.js"></script>
-     <script>
-      
-    </script>
+    <script src="../../js/clean-blog.min.js"></script>
+    
+    <script src="../../js/rainbow-custom.min.js"></script>
+    <script src="../../js/lan/javascript.js"></script>
+    
+    
 
 </body>
 
