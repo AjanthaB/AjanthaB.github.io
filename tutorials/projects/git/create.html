@@ -17,17 +17,19 @@
     <!-- Custom CSS -->
     <link href="../../css/clean-blog.min.css" rel="stylesheet">
     <link href="../../css/clean-blog.css" rel="stylesheet">
+    <link href="../../css/themes/monokai.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    
-         <!-- Favicons
-    ================================================== -->
-    <link rel="shortcut icon" href="../../../favicon.png" >
 
  
+    
+     <!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="../../../favicon.png" >
+
 
 </head>
 
@@ -44,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.html">AjanthaB</a>
+                <a class="navbar-brand" href="../../index.html">AjanthaB</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -71,12 +73,12 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('mongodb.jpg')">
+    <header class="intro-header" style="background-image: url('../../img/post-bg.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1 style="color:#fff;text-align:center;margin-top:-40px;">install MongoDB and Learn basics </h1>
+                        <h1 style="color:#fff;text-align:center;margin-top:-40px;">Git Tutorials </h1>
                         
                         <span class="meta" style="color:#fff;text-align:center;">Posted by <a href="#">AjanthaB</a> on Sep 14, 2015</span>
                     </div>
@@ -93,45 +95,57 @@
                 <div class="col-lg-3 col-md-3">
                     <ul class="left-nav">
 
-                        <p><b>Other Topics</b></p>
+                        <h3>Other Topics</h3>
                         <li>
-                            <a href="index.html">MongoDB Install</a>
+                            <a href="index.html">Git Install</a>
                         </li>
                         <li>
-                            <a href="overview.html">MongoDB Overview</a>
+                            <a href="configure.html">Git Configure</a>
                         </li>
+                        <li>
+                            <a href="create.html">Create Repositories</a>
+                        </li>
+                        <li>
+                            <a href="synchronize.html">Synchronize Changes</a>
+                        </li>
+                        <li>
+                            <a href="group.html">Group Changes</a>
+                        </li>
+                        
                     </ul>  
                 </div>
 
 
                 <div class="col-lg-9  col-md-8 ">
+               
+                             
+                    <p>It is a widely used version control system for software development. It is a distributed revision control system with an emphasis on speed, data integrity, and support for distributed, non-linear workflows. Git was initially designed and developed by Linus Torvalds for Linux kernel development in 2005.</p>
                     
 
-                   <p>MongoDB is an open-source document database, and leading NoSQL database. MongoDB is written in c++</p>
-                   <p>MongoDB (from humongous) is a cross-platform document-oriented database. Classified as a NoSQL database, MongoDB eschews the traditional table-based relational database structure in favor of JSON-like documents with dynamic schemas (MongoDB calls the format BSON), making the integration of data in certain types of applications easier and faster. Released under a combination of the GNU Affero General Public License and the Apache License, MongoDB is free and open-source software.</p>
-                    <p class="" style="margin-top:0px;">First of all Download the mongoDB from <a href="https://www.mongodb.org/">www.mongodb.org</a> </p>
-
-                    <h3>Install MongoDB</h3>
-
                     
-	               <p>double click the setup</p>
-                   
-	               <img src="install_1.jpg" class="img-responsive">
                     
-                    <p>click Next and install it to specific directory or default directory</p>
-
-                    <p>Go to that directory and open terminal and type <b>mongod</b></p>
-                    <p>Now mongodb server will start and waiting for connections on port 27017<br></p>
+                    <h3>CREATE REPOSITORIES</h3>
+                    <p>Start a new repository or obtain one from an existing URL</p>
+                    <p>Creates a new local repository with the specified name</p>
+                    <pre>
+                        <code data-language="javascript">
+      $ git init [project-name]
+                        </code>
+                    </pre>
                     
-                        
-                    <img src="img/server.jpg" class="img-responsive">
                     
-                    <p>now open another terminal, type <b>mongo</b> and hit the Enter </p>
-                    <p>mongo client will start </p>
-                    <img src="img/client.jpg" class="img-responsive">
-                    <p>installation is finished. </p>
-                        
-      
+                     <p>Downloads a project and its entire version history</p>
+                    <pre>
+                        <code data-language="javascript">
+      $ git clone [url]
+                        </code>
+                    </pre>
+                    
+                    
+                    
+                    
+     
+                    
                     
 
                 </div>
@@ -185,11 +199,12 @@
     <script src="../../js/bootstrap.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="../../js/clean-blog.min.js"></script>>
-    <script src="js/functions.js"></script>
-     <script>
-      
-    </script>
+    <script src="../../js/clean-blog.min.js"></script>
+    
+    <script src="../../js/rainbow-custom.min.js"></script>
+    <script src="../../js/lan/javascript.js"></script>
+    
+    
 
 </body>
 

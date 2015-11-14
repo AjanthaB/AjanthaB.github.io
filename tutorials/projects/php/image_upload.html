@@ -115,93 +115,10 @@
                     
 
                    <p>PHP(...) </p>
-                   </p>
-                    <p class="" style="margin-top:0px;">In this tutorial you can see the most important things you want, when developing php based project.</a> </p>
+                   
+                    <p class="" style="margin-top:0px;">In this tutorial you can see the most important things you want, when developing php based project.</p>
 
-                    <h3 class="text-info">Connect to MYSQL Database using php</h3>
-
-                    
-	            
-                    
-                    <p>in php we normaly define the database names and passwords, because they not going to change</p>
-                    <p>'define.php' file</p>
-                    <pre>
-                    	<code data-language="php">
-&lt?php
-	define("HOST","localhost");
-	define("DBNAME","databaseName");
-	define("UNAME","username");
-	define("PW","password");
-?&gt
-                    		
-                    	</code>
-                    </pre>                        
-                    <p>varible name you can change to what ever you want. When you get this varibles to any other php file you have to <b>require<b> this file (<b class="text-warning">keep in mind don't use include because incluse does not give any error or warning if file is not availabe, but require is give error message if file is not availabe</b>). </p>
-                    
-                    <p>you can require any file like this</p>
-                    <pre>
-                    	<code data-language="php">
-&lt?php
-	require 'define.php';
-?&gt
-                    	</code>
-                    </pre> 
-
-                    <p>Now you can create a connection to to database using bellow example. If thre is a error when conneting to database function will show you relevent error message, if not new connection will return
-
-                    </p>
-                    <p><b>function.php file</b></p>
-                    <pre>
-                    	<code data-language="php">
-&lt?php
-	require 'define.php';
-
-	function getconnection(){
-		$connection = mysqli_connect(HOST,UNAME,PW,DBNAME);
-		if(mysqli_connect_error() ){
-			echo('Failed to connect MYSQL DB  '.mysqli_connect_error() );
-		} else return $connection;
-	}
-	// to get new connection
-	$con = getconnection();
-
-?&gt                    		
-                    	</code>
-                    </pre>   
-      				
-
-      				<h3 class="text-info">Execute simple MYSQL Query</h3>
-      				<p>First we want database connection to execute the query.Next we can execute the query using this example</p>
-
-      				<pre>
-      					<code data-language="php">
-&lt?php
-	require 'function.php';
-	$connection = getconnection();
-
-	$query ="your query";
-	// example => $query = "insert into people(name,ssn,address) values('name','12345','Anuradhapura,galnewa')";
-	if($connection->query($query)){
-        	echo "query executed";
-    	}else echo $connection->error;	
-
-?&gt
-      					</code>
-      				</pre>
-
-
-      				<p>or you can define a simple function for that also.</p>
-      				<pre>
-      					<code data-language="php">
-&lt?php
-	function query_execute( $connection, $query){
-		$result = $connection-&gtquery($query);
-		if($result) return $result;
-		else echo $connection-&gterror;
-	}
-?&gt
-      					</code>
-      				</pre>
+              
 
                   <h3 class="text-info">Image Upload using php</h3>
                   <h4 class="text-info">Upload single image</h4>
@@ -339,55 +256,6 @@ function save_img( $files,  $desired_dir,$dir_name){
 
 
 
-               <h4 class="text-info">Simple Login logout script</h4>
-               
-               <p>login.php file is used to keep session for users. for session key we have to use unique value for each user. As example lets think we have user_id for each user.using that we can keep session for each user.we take details as username and password. in database password is stored as md5 coverted password in this example. it can be change acording to your project</p>
-
-               <pre>
-               	<code data-language="html">
- &ltform  action="index.php" method="post"&gt
-      &ltinput  placeholder="uname" name="uname" type="text" autofocus&gt              
-      &ltinput  placeholder="Password" name="password" type="password" value=""&gt
-      &ltinput class="form-control" name="login" type="submit" value="Login"&gt
- &lt/form&gt  
-               	</code>
-               </pre>   
-
-               <p>PHP script for check user_id. If thre is a session for user_id then redirect to relevent directory. if not redirecto to login page again.</p>
-
-               <pre>
-               		<code data-language="php">
-&lt?php
-    session_start();
-    if(isset($_SESSION['user_id'])!="")
-    {
-        header("Location:../home/");
-    }                   
-?&gt
-               		</code>
-               </pre>
-
-
-               <p>If post came</p>
-               <pre>
-               		<code data-language="php">
-&lt?php
-  if($_POST){  
-        require "define.php";
-        $conn = connection();
-        $uname = mysqli_real_escape_string($conn,$_POST['uname']);
-        $upass = mysqli_real_escape_string($conn,$_POST['password']);
-        $query="SELECT * FROM Users WHERE username='$uname'";
-        $result = $conn->query($query);
-        $row = $result->fetch_assoc();                             
-        if($row['Password']==md5($upass) ){
-            $_SESSION['user_id'] = $row['user_id'];
-            header("Location: ../home/"); 
-        }else print("wrong details"); 
-    }
-?&gt
-               		</code>
-               </pre>
 
                 </div>
             </div>

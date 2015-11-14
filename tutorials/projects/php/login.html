@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="install Mongodb and basics">
+    <meta name="description" content="php php-examples php-database-connection">
     <meta name="author" content="Ajantha Bandara elvinlabs.com">
 
     <title>AjanthaB</title>
@@ -17,17 +17,16 @@
     <!-- Custom CSS -->
     <link href="../../css/clean-blog.min.css" rel="stylesheet">
     <link href="../../css/clean-blog.css" rel="stylesheet">
-
+    <link href="../../css/themes/monokai.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    
-         <!-- Favicons
-    ================================================== -->
-    <link rel="shortcut icon" href="../../../favicon.png" >
 
- 
+    <!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="../../../favicon.png" >
+
 
 </head>
 
@@ -44,7 +43,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.html">AjanthaB</a>
+                <a class="navbar-brand" href="../../index.html">AjanthaB</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -71,14 +70,14 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('mongodb.jpg')">
+    <header class="intro-header" style="background-image: url('img/php.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1 style="color:#fff;text-align:center;margin-top:-40px;">install MongoDB and Learn basics </h1>
+                        <h1 style="color:#8A2BE2;margin-top:-40px;text-align:center;">PHP Frequently used things </h1>
                         
-                        <span class="meta" style="color:#fff;text-align:center;">Posted by <a href="#">AjanthaB</a> on Sep 14, 2015</span>
+                        <span class="meta" style="color:#8A2BE2;margin-top:-40px;text-align:center;">Posted by <a href="#">AjanthaB</a> on Oct 23, 2015</span>
                     </div>
                 </div>
             </div>
@@ -93,13 +92,21 @@
                 <div class="col-lg-3 col-md-3">
                     <ul class="left-nav">
 
-                        <p><b>Other Topics</b></p>
+                        <h3>Other Topics</h3>
                         <li>
-                            <a href="index.html">MongoDB Install</a>
+                            <a href="index.html">MYSQL Database Connection</a>
                         </li>
                         <li>
-                            <a href="overview.html">MongoDB Overview</a>
+                            <a href="query.html">Execute Query</a>
                         </li>
+                         <li>
+                            <a href="image_upload.html">Image Upload</a>
+                        </li>
+                         <li>
+                            <a href="login.html">Basic Login Query</a>
+                        </li>
+                        
+
                     </ul>  
                 </div>
 
@@ -107,32 +114,62 @@
                 <div class="col-lg-9  col-md-8 ">
                     
 
-                   <p>MongoDB is an open-source document database, and leading NoSQL database. MongoDB is written in c++</p>
-                   <p>MongoDB (from humongous) is a cross-platform document-oriented database. Classified as a NoSQL database, MongoDB eschews the traditional table-based relational database structure in favor of JSON-like documents with dynamic schemas (MongoDB calls the format BSON), making the integration of data in certain types of applications easier and faster. Released under a combination of the GNU Affero General Public License and the Apache License, MongoDB is free and open-source software.</p>
-                    <p class="" style="margin-top:0px;">First of all Download the mongoDB from <a href="https://www.mongodb.org/">www.mongodb.org</a> </p>
-
-                    <h3>Install MongoDB</h3>
-
-                    
-	               <p>double click the setup</p>
+                   <p>PHP(...) </p>
                    
-	               <img src="install_1.jpg" class="img-responsive">
-                    
-                    <p>click Next and install it to specific directory or default directory</p>
+                    <p class="" style="margin-top:0px;">In this tutorial you can see the most important things you want, when developing php based project. </p>
 
-                    <p>Go to that directory and open terminal and type <b>mongod</b></p>
-                    <p>Now mongodb server will start and waiting for connections on port 27017<br></p>
-                    
-                        
-                    <img src="img/server.jpg" class="img-responsive">
-                    
-                    <p>now open another terminal, type <b>mongo</b> and hit the Enter </p>
-                    <p>mongo client will start </p>
-                    <img src="img/client.jpg" class="img-responsive">
-                    <p>installation is finished. </p>
-                        
-      
-                    
+                 
+
+
+               <h4 class="text-info">Simple Login logout script</h4>
+               
+               <p>login.php file is used to keep session for users. for session key we have to use unique value for each user. As example lets think we have user_id for each user.using that we can keep session for each user.we take details as username and password. in database password is stored as md5 coverted password in this example. it can be change acording to your project</p>
+
+               <pre>
+               	<code data-language="html">
+ &ltform  action="index.php" method="post">
+      &ltinput  placeholder="uname" name="uname" type="text" autofocus&gt              
+      &ltinput  placeholder="Password" name="password" type="password" value=""&gt
+      &ltinput class="form-control" name="login" type="submit" value="Login"&gt
+ &lt/form&gt  
+               	</code>
+               </pre>   
+
+               <p>PHP script for check user_id. If thre is a session for user_id then redirect to relevent directory. if not redirecto to login page again.</p>
+
+               <pre>
+               		<code data-language="php">
+&lt?php
+    session_start();
+    if(isset($_SESSION['user_id'])!="")
+    {
+        header("Location:../home/");
+    }                   
+?&gt
+               		</code>
+               </pre>
+
+
+               <p>If post came</p>
+               <pre>
+               		<code data-language="php">
+&lt?php
+  if($_POST){  
+        require "define.php";
+        $conn = connection();
+        $uname = mysqli_real_escape_string($conn,$_POST['uname']);
+        $upass = mysqli_real_escape_string($conn,$_POST['password']);
+        $query="SELECT * FROM Users WHERE username='$uname'";
+        $result = $conn->query($query);
+        $row = $result->fetch_assoc();                             
+        if($row['Password']==md5($upass) ){
+            $_SESSION['user_id'] = $row['user_id'];
+            header("Location: ../home/"); 
+        }else print("wrong details"); 
+    }
+?&gt
+               		</code>
+               </pre>
 
                 </div>
             </div>
@@ -185,8 +222,11 @@
     <script src="../../js/bootstrap.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="../../js/clean-blog.min.js"></script>>
+    <script src="../../js/clean-blog.min.js"></script>
     <script src="js/functions.js"></script>
+    <script src="../../js/rainbow-custom.min.js"></script>
+    <script src="../../js/lan/php.js"></script>
+    <script src="../../js/lan/html.js"></script>
      <script>
       
     </script>
