@@ -112,11 +112,12 @@
                      <h3>First Example</h3>
 
                      <h3>View</h3>
+                    
 
                     <pre>
                         <code data-language="javascript">
-    FirstName : <input data-bind="value: firstName"/><br><br>
-    LastName :  <input data-bind="value: lastName"/><br><br>
+    FirstName : <input data-bind="value: firstName"/>
+    LastName :  <input data-bind="value: lastName"/>
     FullName :  <span data-bind="text: fullName"></span>
                         </code>
                     </pre>
@@ -126,16 +127,16 @@
                     <pre>
                         <code data-language="javascript">
     function myViewModel(){
-        this.firstName = ko.observable("Ajatha");
-        this.lastName = ko.observable("Bandara");
+        this.firstName = ko.observable("");
+        this.lastName = ko.observable("");
         this.fullName = ko.computed(function(){
             return this.firstName()+" "+this.lastName();
         },this);
 
      };
 
-     var mymodelview = new myViewModel();
-     ko.applyBindings(mymodelview); // activate the Knockout.js
+     var myviewmodel = new myViewModel();
+     ko.applyBindings(myviewmdel); // activate the Knockout.js
                         </code>
                     </pre>
 
@@ -171,8 +172,8 @@
 
 
                     function myModelView(){
-                        this.firstName = ko.observable("Ajatha");
-                        this.lastName = ko.observable("Bandara");
+                        this.firstName = ko.observable("");
+                        this.lastName = ko.observable("");
                         this.fullName = ko.computed(function(){
                             return this.firstName()+" "+this.lastName();
                         },this);

@@ -159,16 +159,18 @@
                     </pre>
 
 
-                    
-                    Array of Students : <b><span data-bind="text: studentArray()"></span></b>
+                    <h3>OutPut</h3>
+                    Array of Students : <b><span data-bind="text: stuArray()"></span></b>
 
 
 
                     <script >
 
                     function studentViewMode(){
-                        var student = ['Ajantha','Dilanka'];
+                        var student = [];
+                        var stu     = ['Ajantha,Dilanka','Dileepa','Suchira','Namesh'];
                         this.studentArray = ko.observableArray(student);
+                        this.stuArray = ko.observableArray(stu);
                     };
 
                     var studentviewmodel = new studentViewMode();

@@ -117,9 +117,9 @@
 
                 <div class="col-lg-9  col-md-8 ">
                
-                     <h3>Obersvable Arrays sort() method</h3>
+                     <h3>Obersvable Arrays splice() method</h3>
 
-                     <p>Using ObservableArray.sort() method we can sort items in the array.But default sort happens ascending order. If you want descending order reverse the array.</p>
+                     <p>Using ObservableArray.splice() method we can remove part of the array and return it. splice() method take two parameters, start-index  and end-index. This method will return from start-index to end0index.</p>
 
                 
 
@@ -127,8 +127,8 @@
 
                        <pre>
                         <code data-language="javascript">
-    <p>sort items in array</p>
-    <button  data-bind="click: removeStudent">Sort</button><br>
+    <p>splice items in array</p>
+    <button  data-bind="click: spliceStudent">Splice</button><br>
     Array of Students : <b><span data-bind="text: studentArray()"></span></b>
          
                         </code>
@@ -136,13 +136,15 @@
 
                     <h3>ViewModel</h3>
 
+                    <p>In this example i'm gonna remove element from 2 to 4 in array.</p>
+                    
                     <pre>
                         <code data-language="javascript">
    function studentViewMode(){
-        var student = ['Suchira','Namesh','Ajantha','Dilanka','Dileepa'];
+        var student = ['Akalanka',Suchira','Namesh','Ajantha','Dilanka','Dileepa'];
         this.studentArray = ko.observableArray(student);
-        this.removeStudent = function(){                   
-            this.studentArray.sort();                        
+        this.spliceStudent = function(){                   
+            this.studentArray.splice(2,4);                        
         };
     };
 
@@ -154,8 +156,8 @@
                         <h3>Output</h3>
                     <div id="student">
                     
-                        <p>Sort items in array</p>
-                        <button  data-bind="click: removeStudent">Sort</button><br>
+                        <p>Splice items in array</p>
+                        <button  data-bind="click: spliceStudent">Splice</button><br>
                         Array of Students : <b><span data-bind="text: stuArray()"></span></b>
 
                     </div>
@@ -164,20 +166,16 @@
                     <script >
 
                     function studentViewMode(){
-                        var student = ['Suchira','Namesh','Ajantha','Dilanka','Dileepa'];
+                        var student = ['Akalanka',Suchira','Namesh','Ajantha','Dilanka','Dileepa'];
                         this.stuArray = ko.observableArray(student);
-                        this.removeStudent = function(){                   
-                                this.stuArray.reverse();                        
+                        this.spliceStudent = function(){                   
+                                this.stuArray.splice(2, 4);                        
                         };
                     };
 
                     var studentviewmodel = new studentViewMode();
                     ko.applyBindings(studentviewmodel,document.getElementById("student"));
                     </script>
-
-
-
-
 
                 </div>
             </div>

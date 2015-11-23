@@ -151,12 +151,14 @@
     ko.applyBindings(studentviewmodel);
                         </code>
                     </pre>
+                    
+                    <h3>Output</h3>
+                    <div id="student">
+                        Add Student Name : <input data-bind="value: studentName"/>
+                        <button  data-bind="click: addStudent">Add</button><br>
+                        Array of Students : <b><span data-bind="text: stuArray()"></span></b>
 
-
-                    Add Student Name : <input data-bind="value: studentName"/>
-                    <button  data-bind="click: addStudent">Add</button><br>
-                    Array of Students : <b><span data-bind="text: stuArray()"></span></b>
-
+                    </div>
 
 
                     <script >
@@ -173,7 +175,7 @@
                         };
                     };
                     var studentviewmodel = new stuViewMode();
-                    ko.applyBindings(studentviewmodel);
+                    ko.applyBindings(studentviewmodel, document.getElementById("student"));
                     </script>
 
 

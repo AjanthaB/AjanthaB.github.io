@@ -151,11 +151,13 @@
                         </code>
                     </pre>
 
+                    <h3>Output</h3>
+                    <div id="student">
+                        <p>Remove first item from array</p>
+                        <button  data-bind="click: removeStudent">Shift</button><br>
+                        Array of Students : <b><span data-bind="text: stuArray()"></span></b>
 
-                    <p>Remove first item from array</p>
-                    <button  data-bind="click: removeStudent">Remove</button><br>
-                    Array of Students : <b><span data-bind="text: stuArray()"></span></b>
-
+                    </div>
 
 
                     <script >
@@ -169,7 +171,7 @@
                     };
 
                     var studentviewmodel = new studentViewMode();
-                    ko.applyBindings(studentviewmodel);
+                    ko.applyBindings(studentviewmodel,document.getElementById("student"));
                     </script>
 
 

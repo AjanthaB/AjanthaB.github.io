@@ -118,7 +118,7 @@
                     <h3>View</h3>
 
                        <pre>
-                        <code data-language="html">
+                        <code data-language="javascript">
    Enter the Student Name : &ltinput data-bind="value: studentName"/&gt
    &ltbutton data-bind="click: addStudent"&gtAdd&lt/button&gt
     Array of Students : <b><span data-bind="text: studentArray()"></span></b>
@@ -130,7 +130,7 @@
                     <pre>
                         <code data-language="javascript">
    function studentViewMode(){
-        var student = ['Ajantha','Dilanka','Dileepa','Suchira','Namesh'];
+        var student = ['Ajantha','Dilanka','Dileepa'];
         this.studentName = ko.observable("");
         this.studentArray = ko.observableArray(student);
         this.addStudent = function(){
@@ -156,9 +156,11 @@
                     <script >
 
                     function studentViewMode(){
-                        var student = ['Ajantha','Dilanka','Dileepa','Suchira','Namesh'];
+                        var student = [''];
+                        var stu = ['Ajantha','Dilanka','Dileepa'];
                         this.studentName = ko.observable("");
-                        this.stuArray = ko.observableArray(student);
+                        this.stuArray = ko.observableArray(stu);
+                         this.studentArray = ko.observableArray(student);
                         this.addStudent = function(){
                             if(this.studentName() != ""){
                                 this.stuArray.push(this.studentName());
