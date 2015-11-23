@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Tthings To Do After installing ubuntu 15.10, install skype on ubuntu, install viber on ubuntu, indtall chrome on ubuntu, install numix theems on ubuntu, install unity-tweak-tool on ubuntu,install media players vls,smplayer on ubuntu">
-    <meta name="Ajantha Bnadara" content="Ajantha Bandara elvinlabs.com">
+    <meta name="description" content="install node.js frameworks on ubuntu 15.10, install phonegap install cordova, install express install socket.io">
+    <meta name="author" content="Ajantha Bandara elvinlabs.com">
 
     <title>AjanthaB</title>
 
@@ -77,7 +77,7 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1 style="color:#fff;text-align:center;margin-top:-50px;">Things Have To Do After Install Ubuntu 15.10 </h1>
+                        <h1 style="color:#fff;text-align:center;margin-top:-40px;">Things Have To Do After Install Ubuntu 15.04 </h1>
                         
                         <span class="meta" style="color:#fff;text-align:center;">Posted by <a href="#">AjanthaB</a> on Oct 12, 2015</span>
                     </div>
@@ -92,7 +92,7 @@
             <div class="row">
 
                 <div class="col-lg-3 col-md-3">
-                         <ul class="left-nav">
+                    <ul class="left-nav">
 
                         <h3>Other Topics</h3>
                          <li>
@@ -114,7 +114,8 @@
                         <li>
                             <a href="database.html">Install Databases</a>
                         </li>
-                    </ul> 
+                    </ul>
+                    
                 </div>
 
 
@@ -124,153 +125,111 @@
                    <p>After Install the Ubuntu 15.04 for your computer</p>
                   
 
-                    <h3>Update & Upgrade</h3>
+                    <h3>Install Node.js  Frameworks</h3>
 
+                    <p>First you have to install node.js on ubuntu. If you want you can watch that tutorial from <a href="nodejs.html">here</a></p>
                     
-                   <p>First you should update your ubuntu using this command</p>
+                    
+                    <p>If you want to install specific version of a framework follow this.</p>
+                       <pre>
+                       <code data-language="javascript">
+   $ sudo apt-get install frameworkName@version                          
+                     </code>
+                   </pre>
+
+                    <h3>Install Express.js</h3>
+                    <p>This comman will install express.js localy in your project. If you want to install it globaly use <b>-g</b> for that.</p>
+                    <p>Jade is a templating engine. It is a language that compiles to HTML. It's a really great way of separating your logic from your markup. If you've dabbled in PHP, you'll know the problem I'm talking about. Jade is awesome. Some people are put off its whitespace-significant syntax, but I recommend giving it a go. It's very clean, and you'll never write a malformed HTML document again! (You'll never have to type angle brackets ever again).</p>
                    <pre>
                        <code data-language="javascript">
-    sudo apt-get update;                           
+   $ npm install express  //install localy
+   $ npm install -g express  //install globaly
                      </code>
                    </pre>
-                   
-                   <p>Next you can upgrade your ubuntu os using this command</p>
-                     <pre>
-                       <code data-language="javascript">
-    sudo apt-get upgrade;                           
-                     </code>
-                   </pre>
-
-                   
-
-                    <h3>Install Numix theme and icons in Ubuntu</h3>
-                    <p>We’ll be using the official Numix PPA. Open a terminal (Ctrl+Alt+T in Ubuntu) and use the following commands to install Numix theme and icons:</p>
-
-                    <pre>
-                        <code data-language="javascript">
-    sudo add-apt-repository ppa:numix/ppa
-    sudo apt-get update
-    sudo apt-get install numix-gtk-theme numix-icon-theme-circle
-                        </code>
-                    </pre>
-                    <p>If you want to install Numix wallpapers, use the command below:</p>
-                    <pre>
-                        <code data-language="javascript">
-    sudo apt-get install numix-wallpaper-*
-                        </code>
-                    </pre>
-
-
-                    <p>Now we are going to give attractive interface to ubuntu. We can install themes for ubuntu. Before tha install the Unity-tweak tool using this command.</p>
-                     <pre>
-                       <code data-language="javascript">
-    sudo apt-get install unity-tweak-tool;                           
-                     </code>
-                   </pre>
-
-                    <h3>Using Numix theme and icons</h3>
                     
-                    <p>Open the Unity-teeak tool and select <b>Themes</b></p>
-                   <img src="img/Unity Tweak Tool_001.png" class="img-responsive">
-                   <p>Now Select the <b>Numix daily</b>.</p>
-                   <img src="img/Selection_002.png" class="img-responsive">
-                   <p>Next click the <b>icons</b> tab select <b>Numix-circle</b></p>
-                   <img src="img/Unity Tweak Tool_003.png" class="img-responsive">
-                   <p>And reduce text-scaling factor to 0.80 using <b>Fonts</b> tab</p>
-                   <img src="img/Selection_004.png" class="img-responsive">
+                    <p>If you install it sucessfuly use this command to get the version of express.js</p>
+                     <pre>
+                       <code data-language="javascript">
+    $ express --version
+    4.13.1
+              </code>
+                   </pre>
+                    
 
-                   <p>Now you can see your application launcher is looks like this(This image is a rotated one to show easily)</p>
-                   <img src="img/unity-launcher_005.png" class="img-responsive">
-                   <p>Your menu looks like this.</p>
-                   <img src="img/Screen.png" class="img-responsive">
 
-                   <p>yaah it's look grate.</p>
 
-                   <p>If you want another themes add these and see what it looks like.</p>
 
+                    <h3>Install Jade</h3>
+                    <p>Jade is a templating engine. It is a language that compiles to HTML. It's a really great way of separating your logic from your markup. If you've dabbled in PHP, you'll know the problem I'm talking about. Jade is awesome. Some people are put off its whitespace-significant syntax, but I recommend giving it a go. It's very clean, and you'll never write a malformed HTML document again! (You'll never have to type angle brackets ever again).</p>
                    <pre>
                        <code data-language="javascript">
- sudo add-apt-repository ppa:numix/ppa
- sudo apt-get update
- sudo apt-get install numix-icon-theme-shine
-
-
-
- sudo add-apt-repository ppa:numix/ppa
- sudo apt-get update
- sudo apt-get install numix-icon-theme-utouch
-
-
- sudo add-apt-repository ppa:moka/stable
-sudo apt-get update
-sudo apt-get install moka-icon-theme
-                          
+    $ npm install -g jade
                      </code>
                    </pre>
-
-
-
-                    <h3>Install VLC media player</h3>
-                    <p>VLC is the king of media players. It can play almost all kind of media files flawlessly. Moreover, it is an Open Source product. To install VLC in Ubuntu 15.04, use the following command:</p>
-                      <pre>
+                    
+                    
+                    <h3>Install body-parser</h3>
+                    <p></p>
+                   <pre>
                        <code data-language="javascript">
-    sudo apt-get install vlc                 
-                     </code>
-                   </pre>
-
-                   <img src="img/VLC media player_006.png" alt="" class="img-responsive">
-                    <h3>Install smplayer</h3>
-                    <p>SMplayer is also a good media player.</p>
-                    <pre>
-                       <code data-language="javascript">                
-    sudo apt-get install smplayer
-                     </code>
-                   </pre>
-                   <img src="img/SMPlayer_007.png" alt="" class="img-responsive">
-
-                    <h3>Install RAR</h3>
-                     <pre>
-                       <code data-language="javascript">                
-    sudo apt-get install rar
-                     </code>
-                   </pre>
-
-                    <h3>Install Viber</h3>
-                    <p>Toi install viber on your computer download <a href="https://www.viber.com/en/products/linux">viber</a> debian packages from here and double click.</p>
-
-
-                    <h3>Install Chrome Browser</h3>
-                    <p>Chrome is a popular browser and free software. First download it from <a href="https://www.google.com/intl/en/chrome/browser/desktop/index.html">chorme official web site</a>. Next double click and install.</p>
-
-
-                    <h3>Improve battery life and reduce overheating</h3>
-                     <pre>
-                       <code data-language="javascript">                
-    sudo add-apt-repository ppa:linrunner/tlp
-    sudo apt-get update
-    sudo apt-get install tlp tlp-rdw
-    sudo tlp start
+    $ npm install -g body-parser
                      </code>
                    </pre>
                     
-                    <h3>Install Ubuntu Restricted Extras</h3>
-                    <p>This will enable your Ubuntu to play popular file formats like mp3, avi, flash videos etc.</p>
-                     <pre>
-                       <code data-language="javascript">                
-                        sudo apt-get install ubuntu-restricted-extras
+              
+                    
+                    
+                     <h3>Install mongoose</h3>
+                    <p>Mongoose is a Node.js library that provides MongoDB object mapping similar to ORM with a familiar interface within Node.js. If you aren't familiar with Object Relational Mapping (ORM) or, Object Data Mapping (ODM) in the case of Mongoose, this means is that Mongoose translates data in the database to JavaScript objects for use in your application. Let's take a look at creating and storing documents in a collection using MongoDB and Mongoose</p>
+                   <pre>
+                       <code data-language="javascript">
+    $ npm install -g mongoose
                      </code>
                    </pre>
                     
-                   <p><a href="tools.html">Next tutorial</a> i'am goona show you how install development tools in linux ubuntu.</p>
-                   <p>Thank you.</p>
-      
                     
+                      <h3>Install passport</h3>
+                    <p>Passport is authentication middleware for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped in to any Express-based web application. A comprehensive set of strategies support authentication using a username and password, Facebook, Twitter, and more.</p>
+                   <pre>
+                       <code data-language="javascript">
+    $ npm install -g passport   
+                     </code>
+                   </pre>
+
+
+          
+                     <h3>Install jasmine</h3>
+                    <p>Jasmine is a behavior-driven development framework for testing JavaScript code. It does not depend on any other JavaScript frameworks. It does not require a DOM. And it has a clean, obvious syntax so that you can easily write tests. This guide is running against Jasmine version 2.0.0.</p>
+                   <pre>
+                       <code data-language="javascript">
+    $ npm install -g jasmine 
+                     </code>
+                   </pre>
+                    
+                    
+                     <h3>Install karma</h3>
+                    <p>Karma is a test runner for JavaScript that runs on Node.js. It is very well suited to testing AngularJS or any other JavaScript projects. Using Karma to run tests using one of many popular JavaScript testing suites (Jasmine, Mocha, QUnit, etc.) and have those tests executed not only in the browsers of your choice, but also on the platform of your choice (desktop, phone, tablet.) Karma is highly configurable, integrates with popular continuous integration packages (Jenkins, Travis, and Semaphore) and has excellent plugin support</p>
+                   <pre>
+                       <code data-language="javascript">
+    $ npm install -g karma  
+                    </code>
+                   </pre>
+                    
+                    
+                     <h3>Install phonegap</h3>
+                    <p>PhoneGap is an open source framework for quickly building cross-platform mobile apps using HTML5, Javascript and CSS.</p>
+                   <pre>
+                       <code data-language="javascript">
+    $ npm install -g phonegap 
+                    </code>
+                   </pre>
+
+  
 
                 </div>
             </div>
-        </div>
-    </article>
-
+       
+   
     <hr>
 
     <!-- Footer -->
