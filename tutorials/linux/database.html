@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="install oracle java 6,7,8 on ubuntu and install open-jdk-6,7,8 on ubuntu">
+    <meta name="description" content="install database on ubuntu, install mongodb on ubuntu 15.10, install coutchdb on ubuntu 15.10, install mysql on ubuntu 15.10, install db2 on ubuntu 15.10">
     <meta name="author" content="Ajantha Bandara elvinlabs.com">
 
     <title>AjanthaB</title>
@@ -124,93 +124,118 @@
                    <p>After Install the Ubuntu 15.04 for your computer</p>
                   
 
-                    <h3>Install Oracle java on your computer</h3>
+                    <h3>Install Database on Ubuntu</h3>
 
                     
-                   <p>Install oracle java 6 using PPA command</p>
+                   <p><b>Installing MySQL on Linux Using Debian Packages</b></p>
+                    <p>Debian package files have names in mysql-MVER-DVER-CPU.deb format. MVER is the MySQL version and DVER is the Debian version. The CPU value indicates the processor type or family for which the package is built, as shown in the following table.</p>
+                    <p>Download the .deb package cd to that directory. Type this command</p>
                    <pre>
                        <code data-language="javascript">
-    sudo add-apt-repository ppa:webupd8team/java
-    sudo apt-get update
-    sudo apt-get install oracle-java6-installer                           
+ $ dpkg -i mysql-MVER-DVER-CPU.deb                   
                      </code>
                    </pre>
-
-                    <p>Install oracle java 7 using PPA command</p>
-                   <pre>
-                       <code data-language="javascript">
-    sudo add-apt-repository ppa:webupd8team/java
-    sudo apt-get update
-    sudo apt-get install oracle-java7-installer                           
-                     </code>
-                   </pre>
-
-
-
-
-                    <p>Install oracle java 8 using PPA command</p>
-                   <pre>
-                       <code data-language="javascript">
-    sudo add-apt-repository ppa:webupd8team/java
-    sudo apt-get update
-    sudo apt-get install oracle-java8-installer                           
-                     </code>
-                   </pre>
-
-                   <p>You JVM directory is <b>/usr/lib/jvm/java-&ltversion&gt-oracle/</b> </p>
-                   <p>Now you can add your enviroments variable JAVA_HOME and JRE_HOME. First open the terminal type this command. you will document with PATH varible.</p>
-                   
-                   <pre>
-                       <code data-language="javascript">
-    sudo gedit /etc/enviroments                           
-                     </code>
-                   </pre>
-                   <p>Add these two lines at the begining and add <b>$JAVA_HOME and $JRE_HOME</b> variables at the end of the <b>PATH</b>. If you want  set java_home  as java 6 or 7 then add the path for java version.</p>
-                   <pre>
-                       <code data-language="javascript">
-    JAVA_HOME="/usr/lib/jvm/java-8-oracle"
-    JRE_HOME="/usr/lib/jvm/java-8-oracle/jre"
-
-
-    PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$JAVA_HOME:$JRE_HOME"
-                     </code>
-                   </pre>
-
-                   <p>You can see the java version that you have installed using <b>javac -version</b> command. It will show the latest version you have installed.</p>
-
-
-
-                   <h3>Install  Open JDK on your computer</h3>
-
-                   <p>Open JDK is another JDK for java. There is no different. But if you want add them using this command</p>
-
-                   <p>Install Open jdk 6</p>
+                    
+                    <p>The Debian package installs files in the /opt/mysql/server-5.5 directory. You may also need to install the libaio library if it is not already present on your system:</p>
+                    
                     <pre>
                        <code data-language="javascript">
-    sudo apt-get update 
-    sudo apt-get install openjdk-6-jdk
+    $ dpkg -i mysql-MVER-DVER-CPU.deb                   
                      </code>
                    </pre>
 
-                   <p>Install Open jdk 7</p>
+
+                   <pre>
+                       <code data-language="javascript">
+    $ sudo apt-get install libaio1                           
+                     </code>
+                   </pre>
+                    
+                    
+                    
+                    
+                       <p><b>Installing MySQL in Command line</b></p>
+                      <pre>
+                       <code data-language="javascript">
+    $ sudo apt-get install mysql-server                          
+                     </code>
+                   </pre>
+                    
+                    <p>You can login to mysql using this commad</p>
                     <pre>
                        <code data-language="javascript">
-    sudo apt-get update 
-    sudo apt-get install openjdk-7-jdk
+    $  mysql -u root -p                         
                      </code>
                    </pre>
+                    
+                    
+                    
+                    
+                    <h3>Install Mongodb</h3>
+                    <p>
+                    
+                        <ul>
+                            <li><b>1. Import the public key used by the package management system.</b><br>
+The Ubuntu package management tools (i.e. dpkg and apt) ensure package consistency and authenticity by requiring that distributors sign packages with GPG keys. Issue the following command to import the MongoDB public GPG Key</li>
+                             <pre>
+                               <code data-language="javascript">
+    $ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10                         
+                             </code>
+                            </pre>
+                            
+                            
+                            <li><b>2.Create a list file for MongoDB</b>.<br>
+Create the /etc/apt/sources.list.d/mongodb-org-3.0.list list file using the command appropriate for your version of Ubuntu: </li>
+                        <pre>
+                            <code data-language="javascript">
+    $  echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list                     
+                            </code>
+                        </pre>
+                            
+                            
+                            
+                            <li><b>3. Reload local package database.</b><br>
+Issue the following command to reload the local package database</li>
+                             <pre>
+                               <code data-language="javascript">
+    $ sudo apt-get update                         
+                             </code>
+                            </pre>
+                            
+                            
+                             <li><b>4. Install the MongoDB packages.</b><br>
+You can install either the latest stable version of MongoDB or a specific version of MongoDB.</li>
+                             <pre>
+                               <code data-language="javascript">
+    $ sudo apt-get install -y mongodb-org                         
+                             </code>
+                            </pre>
+                        </ul>
+                
+                    
+                    </p>
+                
+                    <p><b>Start MongoDB</b>.<br>
+Issue the following command to start mongod:</p>
+                            <pre>
+                               <code data-language="javascript">
+    $ sudo service mongod start                        
+                                </code>
+                            </pre>
+                
+                
+                
+                 <p><b>Stop MongoDB.</b>.<br>
 
-
-                   <p>Install Open jdk 8</p>
-                    <pre>
-                       <code data-language="javascript">
-    sudo apt-get update 
-    sudo apt-get install openjdk-8-jdk
-                     </code>
-                   </pre>
-
-                  
-                  
+As needed, you can stop the mongod process by issuing the following command</p>
+                            <pre>
+                               <code data-language="javascript">
+    $ sudo service mongod stop                        
+                                </code>
+                            </pre>
+                 
+                    
+  
                     
                     
                    <p><a href="tools.html">Next tutorial</a> i'am goona show you how install development tools in linux ubuntu.</p>
