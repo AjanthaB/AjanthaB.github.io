@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+< lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -107,7 +107,7 @@
 
             <div class="col-lg-9  col-md-8 ">
 
-                <h2 class="text-info">Spring Hello World Example</h2>
+                <h2 class="text-info">Spring Custom Login Page Example</h2>
                 <p>This tutorial is base on spring annotation and maven build tool, latest spring
                     security and latest spring mvc framework</p>
 
@@ -123,7 +123,7 @@
 
 
                 <h3>Project Structure </h3>
-                <img src="img/Selection_003.png" alt="spring security hello world">
+                <img src="img/cutom-login-page-structure.png" alt="spring security custom login page">
 
                 <h3>Spring Security Dependencies</h3>
                 <p class="text-info">pom.xml</p>
@@ -231,8 +231,22 @@
     @Controller
     public class HelloController {
 
+        @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+        public ModelAndView loginPage(@RequestParam(value = "error",required = false)String error,
+                        @RequestParam(value = "logout",required = false)String logout ) {
+            ModelAndView model = new ModelAndView();
+            if (error != null) {
+            model.addObject("error", "Invalid Credentials provided.");
+            }
+            if (logout != null) {
+            model.addObject("message", "Logged out successfully.");
+            }
+            model.setViewName("login");
+            return model;
+        }
+
         @RequestMapping(value = { "/", "/&#47;welcome**" }, method = RequestMethod.GET)
-        public ModelAndView welcomePage() {
+            public ModelAndView welcomePage() {
             ModelAndView model = new ModelAndView();
             model.addObject("title", "Spring Security Hello World");
             model.addObject("message", "This is welcome page!");
@@ -243,7 +257,7 @@
         }
 
         @RequestMapping(value = "/admin**", method = RequestMethod.GET)
-        public ModelAndView adminPage() {
+            public ModelAndView adminPage() {
             ModelAndView model = new ModelAndView();
             model.addObject("title", "Spring Security Hello World");
             model.addObject("message", "This is protected page - Admin Page!");
@@ -272,21 +286,62 @@
 
                 <p>When request come, first it going through the security filters. If someOne don't have access
                     to any link give and error page. Let's think when come request <b>/welcome</b> it going through the security filter
-                and create ViewAndModel by the name of admin and show it. How is that happen? viewResolver() method in AppConfig.java(bellow) class
-                is add prefix and suffix into our viewAndModel. True path of our hello.jsp page is <b>/WEB-INF/pages/hello.jsp</b>. It
-                will automatically resolved by the resolver method.</p>
+                    and create ViewAndModel by the name of admin and show it. How is that happen? viewResolver() method in AppConfig.java(bellow) class
+                    is add prefix and suffix into our viewAndModel. True path of our hello.jsp page is <b>/WEB-INF/pages/hello.jsp</b>. It
+                    will automatically resolved by the resolver method.</p>
 
-                <h2>JSP pages for admin.jsp and hello.jsp</h2>
+                <h2>JSP pagess</h2>
+                <p class="text-info">login.jsp</p>
+                <pre>
+                    <code data-language="javascript">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page session="true"%>
+&lthtml&gt
+&lthead&gt
+    <title></title>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel='stylesheet' href='webjars/bootstrap/3.3.6/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="resources/css/loginpage.css">
+&lt/head&gt
+&ltbody&gt
+<div class="wrapper">
+    <form class="form-signin" name='loginForm'
+          action="<c:url value='login'/>" method='POST'>
+        <h2 class="form-signin-heading">Please login</h2>
+        <c:if test="${not empty error}">
+            <div class="text-danger">${error}</div>
+        </c:if>
+        <c:if test="${not empty message}">
+            <div class="text-success">${message}</div>
+        </c:if>
+
+        <input type="text" class="form-control" name="username" placeholder="Email Address" required/>
+        <input type="password" class="form-control" name="password" placeholder="Password" require/>
+        <label class="checkbox">
+            <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+
+        <input type="hidden" name="${_csrf.parameterName}"
+               value="${_csrf.token}" />
+    </form>
+</div>
+&lt/body&gt
+&lthtml&gt
+
+                    </code>
+                </pre>
                 <p class="text-info">admin.jsp</p>
                 <pre>
                     <code data-language="javascript">
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <%@page session="false"%>
     &lthtml&gt
-        &ltbody&gt
-            <h1>Title : ${title}</h1>
-            <h1>Message : ${message}</h1>
-        &lt/body&gt
+    &ltbody&gt
+    <h1>Title : ${title}</h1>
+    <h1>Message : ${message}</h1>
+    &lt/body&gt
     &lt/html&gt
                     </code>
                 </pre>
@@ -299,13 +354,13 @@
     <%@page session="false"%>
     &lthtml&gt
     &ltbody&gt
-        <h1>Title : ${title}</h1>
-        <h1>Message : ${message}</h1>
-        <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <h2>Welcome : ${pageContext.request.userPrincipal.name}
-                | <a href="<c:url value="/logout" />" > Logout </a>
-            </h2>
-        </c:if>
+    <h1>Title : ${title}</h1>
+    <h1>Message : ${message}</h1>
+    <c:if test="${pageContext.request.userPrincipal.name != null}">
+        <h2>Welcome : ${pageContext.request.userPrincipal.name}
+            | <a href="<c:url value="/logout" />" > Logout </a>
+        </h2>
+    </c:if>
     &lt/body&gt
     &lt/html&gt
                     </code>
@@ -342,14 +397,27 @@
              auth.inMemoryAuthentication().withUser("dba").password("123456").roles("DBA");
          }
 
-        @Override
+         @Override
          protected void configure(HttpSecurity http) throws Exception {
-
-             http.authorizeRequests()
+             http
+             .csrf()
+             .disable()
+             .authorizeRequests()
+             .antMatchers("/user/**").access("hasRole('ROLE_USER')")
              .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-             .antMatchers("/dba/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_DBA')")
+             .antMatchers("/dba/**").access("hasRole('ROLE_ADMIN')")
              .and()
-             .formLogin();
+             .formLogin()
+             .loginPage("/login")
+             .defaultSuccessUrl("/welcome")
+             .failureUrl("/login?error")
+             .and()
+             .logout()
+             .logoutSuccessUrl("/login?logout");
+
+             AntPathRequestMatcher pathRequestMatcher = new
+             AntPathRequestMatcher("/logout");
+             http.logout().logoutRequestMatcher(pathRequestMatcher);
 
          }
      }
@@ -362,7 +430,7 @@
                 <pre>
                     <code data-language="javascript">
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("ajantha").password("123456").roles("USER");
         auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN","USER");
         auth.inMemoryAuthentication().withUser("dba").password("123456").roles("DBA");
@@ -401,7 +469,7 @@
     import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
     public class SpringSecurityInitializer extends AbstractSecurityWebApplicationInitializer {
-        // we only want to initialize this
+    // we only want to initialize this
     }
                     </code>
                 </pre>
@@ -445,7 +513,7 @@
     public class AppConfig {
 
         @Bean
-            public InternalResourceViewResolver viewResolver() {
+        public InternalResourceViewResolver viewResolver() {
             InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
             viewResolver.setViewClass(JstlView.class);
             viewResolver.setPrefix("/WEB-INF/pages/");
@@ -454,9 +522,20 @@
             return viewResolver;
         }
 
+        @Override
+        public void addResourceHandlers(ResourceHandlerRegistry registry) {
+            registry.addResourceHandler("webjars/**", "resources/**")
+            .addResourceLocations("classpath:/META-INF/resources/webjars/")
+            .addResourceLocations("resources/");
+        }
+
     }
                     </code>
                 </pre>
+
+                <p>In this class <b>addResourceHandlers()</b> is used to handle the static resources like css,js,
+                    and images. Also if you want to add <b>webjars</b> to your project add above <b>addResourceHandlers()</b> method.</p>
+
                 <p>The equivalent of the <b>Spring XML</b> file</p>
                 <pre>
                     <code data-language="javascript">
@@ -492,19 +571,18 @@
         }
 
         @Override
-            protected Class<&#63>[] getServletConfigClasses() {
+        protected Class<&#63>[] getServletConfigClasses() {
             return null;
         }
 
         @Override
-            protected String[] getServletMappings() {
+        protected String[] getServletMappings() {
             return new String[] { "/" };
         }
 
     }
                     </code>
                 </pre>
-
                 <h4 class="text-info">Note
                     In Servlet 4.x container environment + Spring container will
                     detect and loads the Initializer classes automatically.
@@ -514,7 +592,7 @@
                 <p>127.0.0.1:8080/Spring-Security-HelloWorld/</p>
                 <img src="img/hello.png" alt="result for /welcome url">
                 <p>127.0.0.1:8080/Spring-Security-HelloWorld/login</p>
-                <img src="img/login-page.png" alt="result for /login url">
+                <img src="img/custom-login-page.png" alt="result for /login url">
                 <p>127.0.0.1:8080/Spring-Security-HelloWorld/admin</p>
                 <img src="img/admin-page.png" alt="result for /admin url">
                 <p>127.0.0.1:8080/Spring-Security-HelloWorld/dba</p>
