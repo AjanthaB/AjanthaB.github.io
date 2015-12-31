@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="Spring Security 4.0.3 Spring Configuration with annotation and Basic Authentication and login/logout with custom login form">
+    <meta name="Ajantha Bnadara" content="Ajantha Bandara elvinlabs.com">
+
+    <title>Spring Security</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../css/clean-blog.min.css" rel="stylesheet">
+    <link href="../css/clean-blog.css" rel="stylesheet">
+    <link href="../css/themes/monokai.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="../../favicon.png">
+
+</head>
+<>
+
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../index.html">AjanthaB</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="../">Home</a>
+                </li>
+                <li>
+                    <a href="http://ajantha.elvinlabs.com/">About</a>
+                </li>
+                <li>
+                    <a href="http://ajantha.elvinlabs.com/">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url('../img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1 style="color:#fff;text-align:center;margin-top:-50px;">Spring Security 4.0.3 Tutorial
+                    </h1>
+
+                    <span class="meta" style="color:#fff;text-align:center;">Posted by <a href="#">AjanthaB</a> on Dec 31, 2015</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-3">
+                <ul class="left-nav">
+
+                    <h3>Other Topics</h3>
+                    <li>
+                        <a href="index.html">Overview</a>
+                    </li>
+                    <li>
+                        <a href="configuration.html">Configurations</a>
+                    </li>
+                    <li>
+                        <a href="helloWorld.html">Hello Wold Example</a>
+                    </li>
+
+                </ul>
+            </div>
+
+
+            <div class="col-lg-9  col-md-8 ">
+
+                <h2 class="text-info">Spring Hello World Example</h2>
+                <p>This tutorial is base on spring annotation and maven build tool, latest spring
+                    security and latest spring mvc framework</p>
+
+                <p>Technologies Stack</p>
+                <ol>
+                    <li>Spring mvc 4.2.4.RELEASE</li>
+                    <li>Spring Security 4.0.3.RELEASE</li>
+                    <li>Intellij IDEA 14</li>
+                    <li>JDK 1.8</li>
+                    <li>Apache Maven 3.3.9</li>
+                    <li>Tomcat 8</li>
+                </ol>
+
+
+                <h3>Project Structure </h3>
+                <img src="img/Selection_003.png" alt="spring security hello world">
+
+                <h3>Spring Security Dependencies</h3>
+                <p class="text-info">pom.xml</p>
+                <pre>
+                    <code data-language="javascript">
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.security.version>4.0.3.RELEASE</spring.security.version>
+        <spring.mvc.version>4.2.4.RELEASE</spring.mvc.version>
+        <jdk.version>1.8</jdk.version>
+    </properties>
+
+    <dependencies>
+
+        <!-- Spring Core-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.mvc.version}</version>
+        </dependency>
+
+        <!--  Spring Web-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.mvc.version}</version>
+        </dependency>
+
+        <!-- Spring Webmvc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.mvc.version}</version>
+        </dependency>
+
+        <!-- Spring Security Core -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <!-- Spring Security Web -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <!-- Spring Security Config -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <!-- JSP Tag Library -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <!-- Jackson Databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.6.4</version>
+        </dependency>
+
+        <!-- Spring Security TagLib-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+    </dependencies>
+                    </code>
+                </pre>
+
+
+                <h2>Spring Application </h2>
+                <p>In this controller </p>
+                <ol>
+                    <li>If URL = <b>/admin</b>  controller will return admin.jsp page</li>
+                    <li>If URL = <b>/dba</b>  controller will return admin.jsp page</li>
+                    <li>If URL = <b>/welcome</b>  controller will return hello.jsp page</li>
+                </ol>
+                <p> We are going to secure the <b>/admin</b> and <b>/dba</b> urls.</p>
+                <p class="text-info"><b>HelloController.java</b></p>
+                <pre>
+                    <code data-language="javascript">
+    package com.ajantha.controller;
+
+    import org.springframework.stereotype.Controller;
+    import org.springframework.web.bind.annotation.RequestMapping;
+    import org.springframework.web.bind.annotation.RequestMethod;
+    import org.springframework.web.bind.annotation.RequestParam;
+    import org.springframework.web.servlet.ModelAndView;
+
+    /**
+    * Created by ajantha on 12/20/15.
+    */
+
+    @Controller
+    public class HelloController {
+
+        @RequestMapping(value = { "/", "/&#47;welcome**" }, method = RequestMethod.GET)
+        public ModelAndView welcomePage() {
+            ModelAndView model = new ModelAndView();
+            model.addObject("title", "Spring Security Hello World");
+            model.addObject("message", "This is welcome page!");
+            model.setViewName("hello");
+
+            return model;
+
+        }
+
+        @RequestMapping(value = "/admin**", method = RequestMethod.GET)
+        public ModelAndView adminPage() {
+            ModelAndView model = new ModelAndView();
+            model.addObject("title", "Spring Security Hello World");
+            model.addObject("message", "This is protected page - Admin Page!");
+            model.setViewName("admin");
+
+            return model;
+
+        }
+
+        @RequestMapping(value = "/dba**", method = RequestMethod.GET)
+            public ModelAndView dbaPage() {
+            ModelAndView model = new ModelAndView();
+            model.addObject("title", "Spring Security Hello World");
+            model.addObject("message", "This is protected page - Database Page!");
+            model.setViewName("admin");
+
+            return model;
+
+        }
+
+
+    }
+
+                    </code>
+                </pre>
+
+                <p>When request come, first it going through the security filters. If someOne don't have access
+                    to any link give and error page. Let's think when come request <b>/welcome</b> it going through the security filter
+                and create ViewAndModel by the name of admin and show it. How is that happen? viewResolver() method in AppConfig.java(bellow) class
+                is add prefix and suffix into our viewAndModel. True path of our hello.jsp page is <b>/WEB-INF/pages/hello.jsp</b>. It
+                will automatically resolved by the resolver method.</p>
+
+                <h2>JSP pages for admin.jsp and hello.jsp</h2>
+                <p class="text-info">admin.jsp</p>
+                <pre>
+                    <code data-language="javascript">
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@page session="false"%>
+    &lthtml&gt
+        &ltbody&gt
+            <h1>Title : ${title}</h1>
+            <h1>Message : ${message}</h1>
+        &lt/body&gt
+    &lt/html&gt
+                    </code>
+                </pre>
+                <p>We can access the object send by the controller using jstl tags as above</p>
+
+                <p class="text-info"> hello.jsp</p>
+                <pre>
+                    <code data-language="javascript">
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@page session="false"%>
+    &lthtml&gt
+    &ltbody&gt
+        <h1>Title : ${title}</h1>
+        <h1>Message : ${message}</h1>
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <h2>Welcome : ${pageContext.request.userPrincipal.name}
+                | <a href="<c:url value="/logout" />" > Logout </a>
+            </h2>
+        </c:if>
+    &lt/body&gt
+    &lt/html&gt
+                    </code>
+                </pre>
+                <p>We can get the logged users name as userPricipal.name </p>
+
+                <p>To use Spring security, we need <b class="text-info">spring-security-web</b> and <b class="text-info">spring-security-config</b></p>
+
+
+
+                <h3>Spring Security Configurations</h3>
+                <p>Create a Spring Security configuration java base file, and annotated with <b>@EnableWebSecurity</b></p>
+                <p>In this class defined few Role according to access capability of the users.</p>
+                <p class="text-info"><b>SecurityConfig.java</b></p>
+                <pre>
+                 <code data-language="javascript">
+     package com.ajantha.config
+
+     import org.springframework.beans.factory.annotation.Autowired;
+     import org.springframework.context.annotation.Configuration;
+     import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+     import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+     import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+     import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+     @Configuration
+     @EnableWebSecurity
+     public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+         @Autowired
+         public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+             auth.inMemoryAuthentication().withUser("ajantha").password("123456").roles("USER");
+             auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN");
+             auth.inMemoryAuthentication().withUser("dba").password("123456").roles("DBA");
+         }
+
+        @Override
+         protected void configure(HttpSecurity http) throws Exception {
+
+             http.authorizeRequests()
+             .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+             .antMatchers("/dba/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_DBA')")
+             .and()
+             .formLogin();
+
+         }
+     }
+                 </code>
+                </pre>
+                <p><b>Configure()</b> method is used to configure the resources availability of each user
+                    called Authorization. When we use <b>"admin/**"</b>, all requested URLs begin with "/admin"
+                    only can access with Role <b>ADMIN</b>.</p>
+                <p>If we want to give access to admin as both ADMIN and USER roles we can do that like bellow</p>
+                <pre>
+                    <code data-language="javascript">
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication().withUser("ajantha").password("123456").roles("USER");
+        auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN","USER");
+        auth.inMemoryAuthentication().withUser("dba").password("123456").roles("DBA");
+        // now admin have both roles as admin and user
+    }
+                    </code>
+                </pre>
+                <p>The equivalent of the <b>Spring Security xml</b> file</p>
+                <pre>
+                    <code data-language="javascript">
+    <http auto-config="true">
+        <intercept-url pattern="/admin**" access="ROLE_ADMIN"></intercept-url>
+        <intercept-url pattern="/dba**" access="ROLE_ADMIN,ROLE_DBA"></intercept-url>
+    </http>
+
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="ajantha" password="123456" authorities="ROLE_USER"></user>
+                <user name="admin" password="123456" authorities="ROLE_ADMIN"></user>
+                <user name="dba" password="123456" authorities="ROLE_DBA"></user>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+                    </code>
+                </pre>
+
+
+                <p>Create a class extends <b>AbstractSecurityWebApplicationInitializer</b>,
+                    it will load the springSecurityFilterChain automatically.</p>
+
+                <p class="text-info"><b>SpringSecurityInitializer.java</b></p>
+                <pre>
+                    <code data-language="javascript">
+    package com.ajantha.config.core;
+    import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
+
+    public class SpringSecurityInitializer extends AbstractSecurityWebApplicationInitializer {
+        // we only want to initialize this
+    }
+                    </code>
+                </pre>
+                <p>The equivalent of Spring Security in <b>web.xml</b> file</p>
+                <pre>
+                    <code data-language="javascript">
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy
+        </filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+                    </code>
+                </pre>
+
+                <h3>Spring MVC Configuration</h3>
+                <p>A Config class, define the view’s technology and imports above <b>SecurityConfig.java</b></p>
+                <p>Spring detect this configuration class using <b>@Configuration</b> annotation and scan package
+                    "com.ajantha.web.*" for Beans. And we also import security configuration class using <b>@Import</b> annotation.</p>
+                <p class="text-info"><b>AppConfig.java</b></p>
+                <pre>
+                    <code data-language="javascript">
+    package com.ajantha.config;
+
+    import org.springframework.context.annotation.Bean;
+    import org.springframework.context.annotation.ComponentScan;
+    import org.springframework.context.annotation.Configuration;
+    import org.springframework.context.annotation.Import;
+    import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+    import org.springframework.web.servlet.view.InternalResourceViewResolver;
+    import org.springframework.web.servlet.view.JstlView;
+
+    @EnableWebMvc
+    @Configuration
+    @ComponentScan({ "com.ajantha.web.*" })
+    @Import({ SecurityConfig.class })
+    public class AppConfig {
+
+        @Bean
+            public InternalResourceViewResolver viewResolver() {
+            InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+            viewResolver.setViewClass(JstlView.class);
+            viewResolver.setPrefix("/WEB-INF/pages/");
+            viewResolver.setSuffix(".jsp");
+
+            return viewResolver;
+        }
+
+    }
+                    </code>
+                </pre>
+                <p>The equivalent of the <b>Spring XML</b> file</p>
+                <pre>
+                    <code data-language="javascript">
+    <context:component-scan base-package="com.ajantha.web.*"></context:component-scan>
+
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>/WEB-INF/pages/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+    </bean>
+                    </code>
+                </pre>
+
+                <h3>Create a Initializer class, to load everything.</h3>
+                <p class="text-info"><b>SpringMvcInitializer.java</b></p>
+                <pre>
+                    <code data-language="javascript">
+    package com.ajantha.config.core;
+
+    import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+    import com.ajantha.config.AppConfig;
+
+    public class SpringMvcInitializer
+    extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+        @Override
+        protected Class<&#63>[] getRootConfigClasses() {
+            return new Class[] { AppConfig.class };
+        }
+
+        @Override
+            protected Class<&#63>[] getServletConfigClasses() {
+            return null;
+        }
+
+        @Override
+            protected String[] getServletMappings() {
+            return new String[] { "/" };
+        }
+
+    }
+                    </code>
+                </pre>
+
+                <h4 class="text-info">Note
+                    In Servlet 4.x container environment + Spring container will
+                    detect and loads the Initializer classes automatically.
+                </h4>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<hr>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <li>
+                        <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; Your Website 2014</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="../js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../js/clean-blog.min.js"></script>
+<script src="../js/rainbow-custom.min.js"></script>
+<script src="../js/lan/java.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/lan/javascript.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/lan/html.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+
+</script>
+
+
+</body>
+</html>
