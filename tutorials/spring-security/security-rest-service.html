@@ -57,6 +57,7 @@
                 <li>
                     <a href="helloWorld.html">Hello Wold Example</a>
                 </li>
+
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -113,7 +114,7 @@
 
             <div class="col-lg-10  col-md-10 ">
 
-                <h2 class="text-info">Spring Custom Login Page Example</h2>
+                <h2 class="text-info">Spring Security with RESTful Service</h2>
                 <p>This tutorial is base on spring annotation and maven build tool, latest spring
                     security and latest spring mvc framework</p>
 
@@ -129,7 +130,7 @@
 
 
                 <h3>Project Structure </h3>
-                <img src="img/cutom-login-page-structure.png" alt="spring security custom login page">
+                <img src="img/security-rest-structure.png" alt="spring security custom login page">
 
                 <h3>Spring Security Dependencies</h3>
                 <p class="text-info">pom.xml</p>
@@ -217,9 +218,119 @@
                     <li>If URL = <b>/admin</b>  controller will return admin.jsp page</li>
                     <li>If URL = <b>/dba</b>  controller will return admin.jsp page</li>
                     <li>If URL = <b>/welcome</b>  controller will return hello.jsp page</li>
-
+                    <li>If URL = <b>/rest/user</b>  controller will return users list as json array</li>
                 </ol>
-                <p> We are going to secure the <b>/admin</b> and <b>/dba</b> urls.</p>
+                <p> We are going to secure the <b>/rest/**</b> urls. Only Admin can access this rest urls begin with
+                    <b>/rest/**</b></p>
+
+
+
+                <p class="text-info"><b>RESTController.java</b></p>
+                <pre>
+                    <code data-language="javascript">
+    package com.ajantha.controller;
+
+    import com.ajantha.model.User;
+    import com.ajantha.service.UserService;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.web.bind.annotation.RequestMapping;
+    import org.springframework.web.bind.annotation.RequestMethod;
+    import org.springframework.web.bind.annotation.RestController;
+
+
+    import java.util.List;
+
+    /**
+    * Created by ajantha on 1/1/16.
+    */
+
+    @RestController
+    public class RESTController {
+
+        @Autowired
+        UserService userService;
+
+        @RequestMapping(value = {"/rest/user"}, method = RequestMethod.GET)
+        public ResponseEntity<List<User>> getAllUsers() {
+
+            return  userService.getAllUsers();
+        }
+
+    }
+
+                    </code>
+                </pre>
+
+
+                <p class="text-info">userService.java</p>
+                <pre>
+                    <code data-language="javascript">
+    package com.ajantha.service;
+
+    import com.ajantha.model.User;
+    import org.springframework.http.ResponseEntity;
+
+    import java.util.List;
+
+    /**
+    * Created by ajantha on 1/1/16.
+    */
+    public interface UserService {
+
+        ResponseEntity<List<User>> getAllUsers();
+        }
+
+    }                </code>
+                </pre>
+
+
+                <p class="text-info" >userServiceImpl.java</p>
+                <pre>
+                    <code data-language="javascript">
+    package com.ajantha.service;
+
+    import com.ajantha.model.User;
+    import org.springframework.http.HttpStatus;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.stereotype.Service;
+
+    import java.util.ArrayList;
+    import java.util.List;
+
+    /**
+    * Created by ajantha on 1/1/16.
+    */
+    @Service("userService")
+    public class UserServicesImpl implements UserService {
+
+        private static List<User> users;
+
+        static {
+        users = getDumyUsers();
+        }
+
+        public ResponseEntity<List<User>> getAllUsers(){
+            List<User> userList = users;
+
+            return new ResponseEntity<>(userList, HttpStatus.OK);
+        }
+
+        private static List<User> getDumyUsers(){
+            List<User> userList = new ArrayList<>();
+            userList.add( new User(1,"Ajantha","Bandara"));
+            userList.add( new User(3,"Akalanka","Senewirathne"));
+            userList.add( new User(2,"Dileepa","Jayalath"));
+            userList.add( new User(3,"Dilanka","Rathnayake"));
+            userList.add( new User(3,"Namesh","Sanjitha"));
+            userList.add( new User(3,"Suchira","Dharmawardana"));
+
+            return userList;
+        }
+    }
+
+                    </code>
+                </pre>
 
 
 
@@ -242,8 +353,8 @@
     public class HelloController {
 
         @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
-        public ModelAndView loginPage(@RequestParam(value = "error",required = false)String error,
-                        @RequestParam(value = "logout",required = false)String logout ) {
+            public ModelAndView loginPage(@RequestParam(value = "error",required = false)String error,
+            @RequestParam(value = "logout",required = false)String logout ) {
             ModelAndView model = new ModelAndView();
             if (error != null) {
             model.addObject("error", "Invalid Credentials provided.");
@@ -256,7 +367,7 @@
         }
 
         @RequestMapping(value = { "/", "/&#47;welcome**" }, method = RequestMethod.GET)
-            public ModelAndView welcomePage() {
+        public ModelAndView welcomePage() {
             ModelAndView model = new ModelAndView();
             model.addObject("title", "Spring Security Hello World");
             model.addObject("message", "This is welcome page!");
@@ -267,7 +378,7 @@
         }
 
         @RequestMapping(value = "/admin**", method = RequestMethod.GET)
-            public ModelAndView adminPage() {
+        public ModelAndView adminPage() {
             ModelAndView model = new ModelAndView();
             model.addObject("title", "Spring Security Hello World");
             model.addObject("message", "This is protected page - Admin Page!");
@@ -278,13 +389,13 @@
         }
 
         @RequestMapping(value = "/dba**", method = RequestMethod.GET)
-            public ModelAndView dbaPage() {
+        public ModelAndView dbaPage() {
             ModelAndView model = new ModelAndView();
             model.addObject("title", "Spring Security Hello World");
             model.addObject("message", "This is protected page - Database Page!");
             model.setViewName("admin");
 
-            return model;
+        return model;
 
         }
 
@@ -304,41 +415,41 @@
                 <p class="text-info">login.jsp</p>
                 <pre>
                     <code data-language="javascript">
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page session="true"%>
-&lthtml&gt
-&lthead&gt
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@page session="true"%>
+    &lthtml&gt
+    &lthead&gt
     <title></title>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <link rel='stylesheet' href='webjars/bootstrap/3.3.6/css/bootstrap.min.css'>
     <link rel="stylesheet" href="resources/css/loginpage.css">
-&lt/head&gt
-&ltbody&gt
-<div class="wrapper">
-    <form class="form-signin" name='loginForm'
-          action="<c:url value='login'/>" method='POST'>
-        <h2 class="form-signin-heading">Please login</h2>
-        <c:if test="${not empty error}">
-            <div class="text-danger">${error}</div>
-        </c:if>
-        <c:if test="${not empty message}">
-            <div class="text-success">${message}</div>
-        </c:if>
+    &lt/head&gt
+    &ltbody&gt
+    <div class="wrapper">
+        <form class="form-signin" name='loginForm'
+              action="<c:url value='login'/>" method='POST'>
+            <h2 class="form-signin-heading">Please login</h2>
+            <c:if test="${not empty error}">
+                <div class="text-danger">${error}</div>
+            </c:if>
+            <c:if test="${not empty message}">
+                <div class="text-success">${message}</div>
+            </c:if>
 
-        <input type="text" class="form-control" name="username" placeholder="Email Address" required/>
-        <input type="password" class="form-control" name="password" placeholder="Password" require/>
-        <label class="checkbox">
-            <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
-        </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+            <input type="text" class="form-control" name="username" placeholder="Email Address" required/>
+            <input type="password" class="form-control" name="password" placeholder="Password" require/>
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
+            </label>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 
-        <input type="hidden" name="${_csrf.parameterName}"
-               value="${_csrf.token}" />
-    </form>
-</div>
-&lt/body&gt
-&lthtml&gt
+            <input type="hidden" name="${_csrf.parameterName}"
+                   value="${_csrf.token}" />
+        </form>
+    </div>
+    &lt/body&gt
+    &lthtml&gt
 
                     </code>
                 </pre>
@@ -349,8 +460,8 @@
     <%@page session="false"%>
     &lthtml&gt
     &ltbody&gt
-    <h1>Title : ${title}</h1>
-    <h1>Message : ${message}</h1>
+        <h1>Title : ${title}</h1>
+        <h1>Message : ${message}</h1>
     &lt/body&gt
     &lt/html&gt
                     </code>
@@ -400,36 +511,37 @@
      @EnableWebSecurity
      public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-         @Autowired
-         public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-             auth.inMemoryAuthentication().withUser("ajantha").password("123456").roles("USER");
-             auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN");
-             auth.inMemoryAuthentication().withUser("dba").password("123456").roles("DBA");
-         }
+     @Autowired
+     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+         auth.inMemoryAuthentication().withUser("ajantha").password("123456").roles("USER");
+         auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN");
+         auth.inMemoryAuthentication().withUser("dba").password("123456").roles("DBA");
+     }
 
-         @Override
-         protected void configure(HttpSecurity http) throws Exception {
-             http
-             .csrf()
-             .disable()
-             .authorizeRequests()
-             .antMatchers("/user/**").access("hasRole('ROLE_USER')")
-             .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-             .antMatchers("/dba/**").access("hasRole('ROLE_ADMIN')")
-             .and()
-             .formLogin()
-             .loginPage("/login")
-             .defaultSuccessUrl("/welcome")
-             .failureUrl("/login?error")
-             .and()
-             .logout()
-             .logoutSuccessUrl("/login?logout");
+     @Override
+     protected void configure(HttpSecurity http) throws Exception {
+         http
+         .csrf()
+         .disable()
+         .authorizeRequests()
+         .antMatchers("/user/**").access("hasRole('ROLE_USER')")
+         .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+         .antMatchers("/dba/**").access("hasRole('ROLE_ADMIN')")
+         .antMatchers("/rest/**").access("hasRole('ROLE_ADMIN')")
+         .and()
+         .formLogin()
+         .loginPage("/login")
+         .defaultSuccessUrl("/welcome")
+         .failureUrl("/login?error")
+         .and()
+         .logout()
+         .logoutSuccessUrl("/login?logout");
 
-             AntPathRequestMatcher pathRequestMatcher = new
-             AntPathRequestMatcher("/logout");
-             http.logout().logoutRequestMatcher(pathRequestMatcher);
+         AntPathRequestMatcher pathRequestMatcher = new
+         AntPathRequestMatcher("/logout");
+         http.logout().logoutRequestMatcher(pathRequestMatcher);
 
-         }
+     }
      }
                  </code>
                 </pre>
@@ -440,7 +552,7 @@
                 <pre>
                     <code data-language="javascript">
     @Autowired
-        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("ajantha").password("123456").roles("USER");
         auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN","USER");
         auth.inMemoryAuthentication().withUser("dba").password("123456").roles("DBA");
@@ -458,7 +570,7 @@
                 login-page="/login"
                 default-target-url="/welcome"
                 authentication-failure-url="/login?error"
-                 />
+                />
         <logout logout-success-url="/login?logout" />
     </http>
 
@@ -610,14 +722,21 @@
                 <img src="img/hello.png" alt="result for /welcome url">
                 <p>127.0.0.1:8080/Spring-Security-HelloWorld/login</p>
                 <img src="img/custom-login-page.png" alt="result for /login url">
-                <p>127.0.0.1:8080/Spring-Security-HelloWorld/login?error</p>
-                <img src="img/custom-login-page-error.png"><br>
+
                 <p>127.0.0.1:8080/Spring-Security-HelloWorld/admin</p>
                 <img src="img/admin-page.png" alt="result for /admin url">
-                <p>127.0.0.1:8080/Spring-Security-HelloWorld/dba</p>
-                <img src="img/dba.png" alt="result for /dba url">
-                <p>127.0.0.1:8080/Spring-Security-HelloWorld/login?logout</p>
-                <img src="img/custom-login-logout-success.png">
+
+                <p>127.0.0.1:8080/Spring-Security-HelloWorld/rest/user</p>
+                <img src="img/security-rest-rest-users.png" alt="result for /rest/user url">
+
+                <p>Let's login as a user and check url <b>/rest/user</b></p>
+                <p>127.0.0.1:8080/Spring-Security-HelloWorld/rest/user</p>
+                <img src="img/security-rest-access-denied.png" alt="result for /dba url">
+
+                <p>127.0.0.1:8080/Spring-Security-HelloWorld/admin</p>
+                <img src="img/admin-page.png" alt="result for /admin url">
+                <p>127.0.0.1:8080/Spring-Security-HelloWorld/admin</p>
+                <img src="img/security-rest-logout.png" alt="result for /admin url">
 
                 <h4>Download the Zip file from here <a href="zip/Spting-Security-Custom-login-page.zip"><i class="fa fa-download fa-2x"></i></a></h4>
             </div>
