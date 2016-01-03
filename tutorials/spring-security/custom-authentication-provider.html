@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,6 +57,7 @@
                 <li>
                     <a href="helloWorld.html">Hello Wold Example</a>
                 </li>
+
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -116,9 +117,9 @@
 
             <div class="col-lg-10  col-md-10 ">
 
-                <h2 class="text-info">Spring Custom Login Page Example</h2>
+                <h2 class="text-info">Spring Security Custom Authentication provider With MongoDB</h2>
                 <p>This tutorial is base on spring annotation and maven build tool, latest spring
-                    security and latest spring mvc framework</p>
+                    security, spring data-mongodb and latest spring mvc framework and MongoDB</p>
 
                 <p>Technologies Stack</p>
                 <ol>
@@ -132,7 +133,7 @@
 
 
                 <h3>Project Structure </h3>
-                <img src="img/cutom-login-page-structure.png" alt="spring security custom login page">
+                <img src="img/custom-authentication-provider-structure.png" alt="spring security custom login page">
 
                 <h3>Spring Security Dependencies</h3>
                 <p class="text-info">pom.xml</p>
@@ -189,6 +190,13 @@
             <version>${spring.security.version}</version>
         </dependency>
 
+        <!-- Spring data mongodb -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>1.8.1.RELEASE</version>
+        </dependency>
+
         <!-- JSP Tag Library -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -220,33 +228,40 @@
                     <li>If URL = <b>/admin</b>  controller will return admin.jsp page</li>
                     <li>If URL = <b>/dba</b>  controller will return admin.jsp page</li>
                     <li>If URL = <b>/welcome</b>  controller will return hello.jsp page</li>
-
                 </ol>
-                <p> We are going to secure the <b>/admin</b> and <b>/dba</b> urls.</p>
+                <p>To get admin.jsp page user have to login to system.</p>
 
-
-
-                <p class="text-info"><b>HelloController.java</b></p>
+                <p class="text-info"><b>UserController.java</b></p>
                 <pre>
                     <code data-language="javascript">
     package com.ajantha.controller;
 
+    import org.slf4j.Logger;
+    import org.slf4j.LoggerFactory;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.data.mongodb.core.MongoTemplate;
     import org.springframework.stereotype.Controller;
     import org.springframework.web.bind.annotation.RequestMapping;
     import org.springframework.web.bind.annotation.RequestMethod;
     import org.springframework.web.bind.annotation.RequestParam;
     import org.springframework.web.servlet.ModelAndView;
 
+
     /**
     * Created by ajantha on 12/20/15.
     */
-
     @Controller
-    public class HelloController {
+    public class UserController {
+
+        private static final Logger LOGGER =
+        LoggerFactory.getLogger(UserController.class);
+
+        @Autowired
+        private MongoTemplate mongoTemplate;
 
         @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
-        public ModelAndView loginPage(@RequestParam(value = "error",required = false)String error,
-                        @RequestParam(value = "logout",required = false)String logout ) {
+            public ModelAndView loginPage(@RequestParam(value = "error",required = false)String error,
+            @RequestParam(value = "logout",required = false)String logout ) {
             ModelAndView model = new ModelAndView();
             if (error != null) {
             model.addObject("error", "Invalid Credentials provided.");
@@ -255,18 +270,8 @@
             model.addObject("message", "Logged out successfully.");
             }
             model.setViewName("login");
-            return model;
-        }
-
-        @RequestMapping(value = { "/", "/&#47;welcome**" }, method = RequestMethod.GET)
-            public ModelAndView welcomePage() {
-            ModelAndView model = new ModelAndView();
-            model.addObject("title", "Spring Security Hello World");
-            model.addObject("message", "This is welcome page!");
-            model.setViewName("hello");
 
             return model;
-
         }
 
         @RequestMapping(value = "/admin**", method = RequestMethod.GET)
@@ -303,45 +308,423 @@
                     is add prefix and suffix into our viewAndModel. True path of our hello.jsp page is <b>/WEB-INF/pages/hello.jsp</b>. It
                     will automatically resolved by the resolver method.</p>
 
+
+                <p>We are gonna create a POJO class for Application user with Role. </p>
+                <p class="text-info"><b>ApplicationUser.java</b></p>
+                <pre>
+                    <code data-language="javascript">
+package com.ajantha.model;
+
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.List;
+
+/**
+* Created by ajantha on 1/1/16.
+*/
+@Document(collection = "applicationuser")
+public  class ApplicationUser implements UserDetails {
+
+    @Id
+    private String  userId;
+    private String userName;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private List<Role> authorities;
+    private boolean accountNonExpired = true;
+    private boolean accountNonLocked = true;
+    private boolean credentialsNonExpired = true;
+    private boolean enabled = true;
+
+    public ApplicationUser() {
+    }
+
+    public String getTestUserId() {
+        return testUserId;
+    }
+
+    public void setTestUserId(String testUserId) {
+        this.testUserId = testUserId;
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
+    }
+
+    public void setUsername(String userName) {
+        this.userName = userName;
+    }
+
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public List<Role> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<Role> authorities) {
+        this.authorities = authorities;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+}
+
+                    </code>
+                </pre>
+
+
+
+
+                <p>In here we have to override the methods in UserDetails interface.</p>
+
+                <p class="text-info"><b>Role.java</b></p>
+                <pre>
+                    <code data-language="javascript">
+    package com.ajantha.model;
+
+    import org.springframework.security.core.GrantedAuthority;
+
+    /**
+    * Created by ajantha on 1/2/16.
+    */
+    public class Role  implements GrantedAuthority {
+        private String name;
+
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getAuthority() {
+            return this.name;
+        }
+    }
+                    </code>
+                </pre>
+
+
+                <p class="text-info">ApplicationUserAuthenticationProvider.java</p>
+                <pre>
+                    <code data-language="javascript">
+    package com.ajantha.service;
+
+    import com.ajantha.model.ApplicationUser;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.security.authentication.AuthenticationProvider;
+    import org.springframework.security.authentication.BadCredentialsException;
+    import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+    import org.springframework.security.core.Authentication;
+    import org.springframework.security.core.AuthenticationException;
+    import org.springframework.security.core.GrantedAuthority;
+    import org.springframework.stereotype.Component;
+
+    import java.util.Collection;
+
+    /**
+    * Created by ajantha on 1/2/16.
+    */
+    @Component
+    public class ApplicationUserAuthenticationProvider implements AuthenticationProvider {
+
+        @Autowired
+        private ApplicationUserService applicationUserService;
+
+        @Override
+        public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        String username = authentication.getName();
+        String password = (String) authentication.getCredentials();
+
+        ApplicationUser user = applicationUserService.loadUserByUsername(username);
+
+        if (user == null || !user.getUsername().equalsIgnoreCase(username)) {
+            throw new BadCredentialsException("Username not found.");
+        }
+
+        if (!password.equals(user.getPassword())) {
+            throw new BadCredentialsException("Wrong password.");
+        }
+
+        Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
+
+            return new UsernamePasswordAuthenticationToken(user, password, authorities);
+        }
+
+        @Override
+        public boolean supports(Class<?> arg0) {
+            return true;
+        }
+
+    }
+
+                    </code>
+                </pre>
+
+
+                <p class="text-info">ApplicationUserService.java</p>
+                <pre>
+                    <code data-language="javascript">
+    package com.ajantha.service;
+
+    import com.ajantha.model.ApplicationUser;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.security.core.userdetails.UserDetailsService;
+    import org.springframework.security.core.userdetails.UsernameNotFoundException;
+    import org.springframework.stereotype.Service;
+
+    /**
+    * Created by ajantha on 1/1/16.
+    */
+    @Service
+    public class ApplicationUserService implements UserDetailsService {
+
+        @Autowired
+        private ApplicationUserServiceImpl testUserService;
+
+        public ApplicationUser loadUserByUsername(String username) throws UsernameNotFoundException {
+            return testUserService.loadUserByUsername(username);
+        }
+
+    }
+
+                    </code>
+                </pre>
+
+
+                <p class="text-info">ApplicationUserServiceImpl.java</p>
+                <pre>
+                    <code data-language="javascript">
+    package com.ajantha.service;
+
+    import com.ajantha.base.Base;
+    import com.ajantha.model.ApplicationUser;
+    import org.slf4j.Logger;
+    import org.slf4j.LoggerFactory;
+    import org.springframework.data.mongodb.core.query.Criteria;
+    import org.springframework.data.mongodb.core.query.Query;
+    import org.springframework.stereotype.Repository;
+
+
+    /**
+    * Created by ajantha on 1/1/16.
+    */
+
+    @Repository
+    public class ApplicationUserServiceImpl extends Base {
+
+        private static final Logger LOGGER =
+        LoggerFactory.getLogger(ApplicationUserServiceImpl.class);
+
+        public ApplicationUser loadUserByUsername(final String username) {
+
+
+            LOGGER.debug("userName================"+username);
+            Query query = new Query();
+            query.addCriteria(Criteria.where("userName").is(username));
+            ApplicationUser applicationUser = getMongoTemplate().findOne(query,ApplicationUser.class);
+            LOGGER.debug("userName================"+ applicationUser.getPassword());
+
+            return applicationUser;
+        }
+
+    }
+
+                    </code>
+                </pre>
+
+
+                <p>But Keep Remember to add user to your database. It can do that using this class. Run this first and
+                to add</p>
+
+                <pre>
+                    <code data-language="javascript">
+    package com.ajantha.controller;
+
+    import com.ajantha.config.MongoConfig;
+    import com.ajantha.model.ApplicationUser;
+    import com.ajantha.model.Role;
+    import org.springframework.context.ApplicationContext;
+    import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+    import org.springframework.data.mongodb.core.MongoTemplate;
+
+    import java.util.ArrayList;
+    import java.util.List;
+
+    /**
+    * Created by ajantha on 1/3/16.
+    */
+    public class test {
+        public static void main(String[] args) {
+
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MongoConfig.class);
+        MongoTemplate mongoTemplate = (MongoTemplate) applicationContext.getBean("mongoTemplate");
+
+        ApplicationUser user = new ApplicationUser();
+        user.setFirstName("Ajantha");
+        user.setLastName("Bandara");
+        user.setUsername("admin");
+        user.setPassword("123456");
+        Role role= new Role();
+        role.setName("ROLE_ADMIN");
+        List<Role> roles = new ArrayList<>();
+        roles.add(role);
+        user.setAuthorities(roles);
+
+        mongoTemplate.insert(user);
+
+        }
+    }
+
+                    </code>
+                </pre>
+
+                <p class="text-info">Base.java</p>
+                <pre>
+                    <code data-language="javascript">
+    package com.ajantha.base;
+
+    import com.ajantha.config.MongoConfig;
+    import org.springframework.context.ApplicationContext;
+    import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+    import org.springframework.data.mongodb.core.MongoOperations;
+    import org.springframework.data.mongodb.core.MongoTemplate;
+
+    /**
+    * Created by ajantha on 1/2/16.
+    */
+    public class Base {
+
+        public  ApplicationContext applicationContext;
+        public  MongoTemplate mongoTemplate ;
+        public  MongoOperations mongoOperations ;
+
+        public  MongoTemplate getMongoTemplate(){
+            applicationContext = new AnnotationConfigApplicationContext(MongoConfig.class);
+            mongoTemplate = (MongoTemplate) applicationContext.getBean("mongoTemplate");
+
+            return mongoTemplate;
+        }
+
+
+    }
+
+                    </code>
+                </pre>
+
                 <h2>JSP pagess</h2>
                 <p class="text-info">login.jsp</p>
                 <pre>
                     <code data-language="javascript">
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page session="true"%>
-&lthtml&gt
-&lthead&gt
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@page session="true"%>
+    &lthtml&gt
+    &lthead&gt
     <title></title>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <link rel='stylesheet' href='webjars/bootstrap/3.3.6/css/bootstrap.min.css'>
     <link rel="stylesheet" href="resources/css/loginpage.css">
-&lt/head&gt
-&ltbody&gt
-<div class="wrapper">
-    <form class="form-signin" name='loginForm'
-          action="<c:url value='login'/>" method='POST'>
-        <h2 class="form-signin-heading">Please login</h2>
-        <c:if test="${not empty error}">
-            <div class="text-danger">${error}</div>
-        </c:if>
-        <c:if test="${not empty message}">
-            <div class="text-success">${message}</div>
-        </c:if>
+    &lt/head&gt
+    &ltbody&gt
+    <div class="wrapper">
+        <form class="form-signin" name='loginForm'
+              action="<c:url value='login'/>" method='POST'>
+            <h2 class="form-signin-heading">Please login</h2>
+            <c:if test="${not empty error}">
+                <div class="text-danger">${error}</div>
+            </c:if>
+            <c:if test="${not empty message}">
+                <div class="text-success">${message}</div>
+            </c:if>
 
-        <input type="text" class="form-control" name="username" placeholder="Email Address" required/>
-        <input type="password" class="form-control" name="password" placeholder="Password" require/>
-        <label class="checkbox">
-            <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
-        </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+            <input type="text" class="form-control" name="username" placeholder="Email Address" required/>
+            <input type="password" class="form-control" name="password" placeholder="Password" require/>
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
+            </label>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 
-        <input type="hidden" name="${_csrf.parameterName}"
-               value="${_csrf.token}" />
-    </form>
-</div>
-&lt/body&gt
-&lthtml&gt
+            <input type="hidden" name="${_csrf.parameterName}"
+                   value="${_csrf.token}" />
+        </form>
+    </div>
+    &lt/body&gt
+    &lthtml&gt
 
                     </code>
                 </pre>
@@ -354,6 +737,11 @@
     &ltbody&gt
     <h1>Title : ${title}</h1>
     <h1>Message : ${message}</h1>
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <h2>Welcome : ${pageContext.request.userPrincipal.name}
+                | <a href="<c:url value="logout" />" > Logout </a>
+            </h2>
+        </c:if>
     &lt/body&gt
     &lt/html&gt
                     </code>
@@ -371,7 +759,7 @@
     <h1>Message : ${message}</h1>
     <c:if test="${pageContext.request.userPrincipal.name != null}">
         <h2>Welcome : ${pageContext.request.userPrincipal.name}
-            | <a href="<c:url value="/logout" />" > Logout </a>
+            | <a href="<c:url value="logout" />" > Logout </a>
         </h2>
     </c:if>
     &lt/body&gt
@@ -384,41 +772,88 @@
 
 
 
+                <h3>Spring MongoDB Configuration</h3>
+                <p class="text-info"><b>MongoConfig.java</b></p>
+                <p>Before application run Start the mongoDb server. </p>
+                <pre>
+                    <code data-language="javascript">
+    package com.ajantha.config;
+
+    import com.mongodb.MongoClient;
+    import org.springframework.context.annotation.Bean;
+    import org.springframework.context.annotation.Configuration;
+    import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+    import org.springframework.data.mongodb.core.MongoTemplate;
+
+    /**
+    * Created by ajantha on 1/1/16.
+    */
+
+    @Configuration
+    public class MongoConfig extends AbstractMongoConfiguration {
+
+        @Override
+        public String getDatabaseName(){
+            // i am using my database name as "testdb"
+            return "testdb";
+        }
+
+        @Override
+        public MongoClient mongo(){
+            return new MongoClient("127.0.0.1");
+        }
+
+        @Override
+        @Bean
+        public MongoTemplate mongoTemplate() throws Exception {
+            return new MongoTemplate(mongo(), getDatabaseName());
+        }
+    }
+
+                    </code>
+                </pre>
+
                 <h3>Spring Security Configurations</h3>
                 <p>Create a Spring Security configuration java base file, and annotated with <b>@EnableWebSecurity</b></p>
                 <p>In this class defined few Role according to access capability of the users.</p>
                 <p class="text-info"><b>SecurityConfig.java</b></p>
                 <pre>
                  <code data-language="javascript">
-     package com.ajantha.config
+     package com.ajantha.config;
 
+     import com.ajantha.service.ApplicationUserAuthenticationProvider;
      import org.springframework.beans.factory.annotation.Autowired;
      import org.springframework.context.annotation.Configuration;
      import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
      import org.springframework.security.config.annotation.web.builders.HttpSecurity;
      import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
      import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+     import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+     /**
+     * Created by ajantha on 12/20/15.
+     */
 
      @Configuration
      @EnableWebSecurity
      public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
          @Autowired
+         private ApplicationUserAuthenticationProvider authenticationProvider;
+
+         @Autowired
          public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-             auth.inMemoryAuthentication().withUser("ajantha").password("123456").roles("USER");
-             auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN");
-             auth.inMemoryAuthentication().withUser("dba").password("123456").roles("DBA");
+            auth.authenticationProvider(authenticationProvider);
          }
 
          @Override
-         protected void configure(HttpSecurity http) throws Exception {
+         protected void configure( HttpSecurity http) throws Exception {
+
              http
-             .csrf()
-             .disable()
              .authorizeRequests()
              .antMatchers("/user/**").access("hasRole('ROLE_USER')")
              .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-             .antMatchers("/dba/**").access("hasRole('ROLE_ADMIN')")
+             .antMatchers("/rest/**").access("hasRole('ROLE_ADMIN')")
              .and()
              .formLogin()
              .loginPage("/login")
@@ -426,60 +861,29 @@
              .failureUrl("/login?error")
              .and()
              .logout()
-             .logoutSuccessUrl("/login?logout");
+             .logoutSuccessUrl("/login?logout")
+             .and()
+             .csrf();
 
              AntPathRequestMatcher pathRequestMatcher = new
              AntPathRequestMatcher("/logout");
-             http.logout().logoutRequestMatcher(pathRequestMatcher);
+            http.logout().logoutRequestMatcher(pathRequestMatcher);
 
-         }
      }
+
+
+     }
+
+
+
                  </code>
                 </pre>
                 <p><b>Configure()</b> method is used to configure the resources availability of each user
                     called Authorization. When we use <b>"admin/**"</b>, all requested URLs begin with "/admin"
                     only can access with Role <b>ADMIN</b>.</p>
-                <p>If we want to give access to admin as both ADMIN and USER roles we can do that like bellow</p>
-                <pre>
-                    <code data-language="javascript">
-    @Autowired
-        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("ajantha").password("123456").roles("USER");
-        auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN","USER");
-        auth.inMemoryAuthentication().withUser("dba").password("123456").roles("DBA");
-        // now admin have both roles as admin and user
-    }
-                    </code>
-                </pre>
-                <p>The equivalent of the <b>Spring Security xml</b> file</p>
-                <pre>
-                    <code data-language="javascript">
-    <http auto-config="true">
-        <intercept-url pattern="/admin**" access="ROLE_ADMIN"></intercept-url>
-        <intercept-url pattern="/dba**" access="ROLE_ADMIN,ROLE_DBA"></intercept-url>
-        <form-login
-                login-page="/login"
-                default-target-url="/welcome"
-                authentication-failure-url="/login?error"
-                 />
-        <logout logout-success-url="/login?logout" />
-    </http>
 
 
-    <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="ajantha" password="123456" authorities="ROLE_USER"></user>
-                <user name="admin" password="123456" authorities="ROLE_ADMIN"></user>
-                <user name="dba" password="123456" authorities="ROLE_DBA"></user>
-            </user-service>
-        </authentication-provider>
-    </authentication-manager>
-                    </code>
-                </pre>
-
-
-                <p>Create a class extends <b>AbstractSecurityWebApplicationInitializer</b>,
+                <p>Next create a class extends <b>AbstractSecurityWebApplicationInitializer</b>,
                     it will load the springSecurityFilterChain automatically.</p>
 
                 <p class="text-info"><b>SpringSecurityInitializer.java</b></p>
@@ -491,21 +895,6 @@
     public class SpringSecurityInitializer extends AbstractSecurityWebApplicationInitializer {
     // we only want to initialize this
     }
-                    </code>
-                </pre>
-                <p>The equivalent of Spring Security in <b>web.xml</b> file</p>
-                <pre>
-                    <code data-language="javascript">
-    <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy
-        </filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
                     </code>
                 </pre>
 
@@ -556,22 +945,6 @@
                 <p>In this class <b>addResourceHandlers()</b> is used to handle the static resources like css,js,
                     and images. Also if you want to add <b>webjars</b> to your project add above <b>addResourceHandlers()</b> method.</p>
 
-                <p>The equivalent of the <b>Spring XML</b> file</p>
-                <pre>
-                    <code data-language="javascript">
-    <context:component-scan base-package="com.ajantha.web.*"></context:component-scan>
-
-    <bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix">
-            <value>/WEB-INF/pages/</value>
-        </property>
-        <property name="suffix">
-            <value>.jsp</value>
-        </property>
-    </bean>
-                    </code>
-                </pre>
 
                 <h3>Create a Initializer class, to load everything.</h3>
                 <p class="text-info"><b>SpringMvcInitializer.java</b></p>
@@ -582,8 +955,8 @@
     import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
     import com.ajantha.config.AppConfig;
 
-    public class SpringMvcInitializer
-    extends AbstractAnnotationConfigDispatcherServletInitializer {
+        public class SpringMvcInitializer
+        extends AbstractAnnotationConfigDispatcherServletInitializer {
 
         @Override
         protected Class<&#63>[] getRootConfigClasses() {
@@ -613,16 +986,14 @@
                 <img src="img/hello.png" alt="result for /welcome url">
                 <p>127.0.0.1:8080/Spring-Security-HelloWorld/login</p>
                 <img src="img/custom-login-page.png" alt="result for /login url">
-                <p>127.0.0.1:8080/Spring-Security-HelloWorld/login?error</p>
-                <img src="img/custom-login-page-error.png"><br>
+
                 <p>127.0.0.1:8080/Spring-Security-HelloWorld/admin</p>
                 <img src="img/admin-page.png" alt="result for /admin url">
-                <p>127.0.0.1:8080/Spring-Security-HelloWorld/dba</p>
-                <img src="img/dba.png" alt="result for /dba url">
-                <p>127.0.0.1:8080/Spring-Security-HelloWorld/login?logout</p>
-                <img src="img/custom-login-logout-success.png">
 
-                <h4>Download the Zip file from here <a href="zip/Spting-Security-Custom-login-page.zip"><i class="fa fa-download fa-2x"></i></a></h4>
+                <p>127.0.0.1:8080/Spring-Security-HelloWorld/admin</p>
+                <img src="img/security-rest-logout.png" alt="result for /admin url">
+
+                <h4>Download the Zip file from here <a href="zip/spring-custom-Authentication-mongodb.zip"><i class="fa fa-download fa-2x"></i></a></h4>
             </div>
         </div>
     </div>
