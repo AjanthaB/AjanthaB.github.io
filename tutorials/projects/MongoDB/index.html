@@ -111,7 +111,7 @@
                    <p>MongoDB (from humongous) is a cross-platform document-oriented database. Classified as a NoSQL database, MongoDB eschews the traditional table-based relational database structure in favor of JSON-like documents with dynamic schemas (MongoDB calls the format BSON), making the integration of data in certain types of applications easier and faster. Released under a combination of the GNU Affero General Public License and the Apache License, MongoDB is free and open-source software.</p>
                     <p class="" style="margin-top:0px;">First of all Download the mongoDB from <a href="https://www.mongodb.org/">www.mongodb.org</a> </p>
 
-                    <h3>Install MongoDB</h3>
+                    <h3>Install MongoDB on Windows </h3>
 
                     
 	               <p>double click the setup</p>
@@ -130,8 +130,26 @@
                     <p>mongo client will start </p>
                     <img src="img/client.jpg" class="img-responsive">
                     <p>installation is finished. </p>
-                        
-      
+
+                    <h3>Install MongoDB on Linux </h3>
+                    <p>First, download the mongodb and put the extracted files into a folder. Next add the path into <b>/etc/enviroment</b> file or
+                    <b>/etc/profile</b> file.</p>
+                    <p>Example mongodb path in laptop => <b>/home/ajantha/programmes/dbs/mongodb-3.2.0/</b></p>
+                    <p>Add the path as follows<br>
+                    <b>export MONGODB_HOME=/home/ajantha/programmes/dbs/mongodb-3.2.0<br>
+                        export PATH=$MONGODB_HOME/bin:$PATH
+                    </b>
+                    </p>
+
+                    <p>After that, we should creat a db path for mongodb. </p>
+                    <p>Open  a terminal and type bellow command in root directory<br>
+                    <b>sudo mkdir -p /data/db<br>
+                        sudo chown -R $USER /data/db</b>
+                    </p>
+
+                    <p>Now you can open the mongodb. Open a terminal and type <b>mongod</b> to start the mongodb server. Open another terminal
+                    and type <b>mongo</b> to start thr mongodb client.</p>
+
                     
 
                 </div>
