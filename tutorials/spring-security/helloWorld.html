@@ -86,13 +86,13 @@
 <!-- Post Content -->
 <article>
     <div class="container">
-        <div> class="row">
+        <div>
 
             <div class="col-lg-11 col-lg-offset-1  col-md-11 col-md-offset-1 col-sm-11 col-xs-11 ">
 
                 <h2 class="text-info">Spring Security Hello World Example</h2>
-                <p>This tutorial is base on spring annotation and maven build tool, latest spring
-                    security and latest spring mvc framework</p>
+                <p>This tutorial is based on spring annotation, maven build tool, spring
+                    security, and spring MVC framework</p>
 
                 <h3>Other Posts</h3>
                 <ul >
@@ -200,11 +200,13 @@
                 <h2>Spring Application </h2>
                 <p>In this controller </p>
                 <ol>
-                    <li>If URL = <b>/admin</b>  controller will return admin.jsp page</li>
-                    <li>If URL = <b>/dba</b>  controller will return admin.jsp page</li>
-                    <li>If URL = <b>/welcome</b>  controller will return hello.jsp page</li>
+                    <li>If the URL is = "<b>/admin</b>"  controller will return <b>admin.jsp</b> page</li>
+                    <li>If the URL is = "<b>/dba</b>"  controller will return <b>admin.jsp</b> page</li>
+                    <li>If the URL is = "<b>/welcome</b>"  controller will return <b>hello.jsp</b> page</li>
                 </ol>
-                <p> We are going to secure the <b>/admin</b> and <b>/dba</b> urls.</p>
+                <p> But,we are going to secure the "<b>/admin</b>" and "<b>/dba</b>" urls.
+                    The page <b>admin.jsp</b> only can see users who has Role as <b>Admin</b>.
+                    But <b>/dba</b> URL can access both ADMIN role and DBA role. </p>
                 <p class="text-info"><b>HelloController.java</b></p>
                 <pre>
                     <code data-language="javascript">
@@ -262,11 +264,11 @@
                     </code>
                 </pre>
 
-                <p>When request come, first it going through the security filters. If someOne don't have access
-                    to any link give and error page. Let's think when come request <b>/welcome</b> it going through the security filter
-                and create ViewAndModel by the name of admin and show it. How is that happen? viewResolver() method in AppConfig.java(bellow) class
-                is add prefix and suffix into our viewAndModel. True path of our hello.jsp page is <b>/WEB-INF/pages/hello.jsp</b>. It
-                will automatically resolved by the resolver method.</p>
+                <p>When a request come, first it going through the security filters. If someone don't have access to any link give and error page.
+                    Let's think when a request come to "/welcome" it going through the security
+                    filter and create ViewAndModel by the name of admin and renders it.
+                    How is that happen? viewResolver() method in AppConfig.java(bellow) class is add prefix and suffix into our viewAndModel.
+                    True path of our hello.jsp page is "/WEB-INF/pages/hello.jsp". It will automatically resolved by the resolver method.</p>
 
                 <h2>JSP pages for admin.jsp and hello.jsp</h2>
                 <p class="text-info">admin.jsp</p>
@@ -282,7 +284,7 @@
     &lt/html&gt
                     </code>
                 </pre>
-                <p>We can access the object send by the controller using jstl tags as above</p>
+                <p>We can access the object sent by the controller using jstl tags as above</p>
 
                 <p class="text-info"> hello.jsp</p>
                 <pre>
@@ -302,15 +304,13 @@
     &lt/html&gt
                     </code>
                 </pre>
-                <p>We can get the logged users name as userPricipal.name </p>
-
-                <p>To use Spring security, we need <b class="text-info">spring-security-web</b> and <b class="text-info">spring-security-config</b></p>
-
-
-
+                <p>We can get the logged users name using userPricipal.name </p>
+                <!--&lt;!&ndash;<p>To use Spring security, we need <b class="text-info">spring-security-web</b> and <b class="text-info">spring-security-config</b></p>&#45;&#45;-->
                 <h3>Spring Security Configurations</h3>
+
+                <p> In Spring security ,we can define java files to configure the project. Does not need any XML knowledge.
+                    In this tutorial, I am gonna defined few Roles who has a different kind of capabilities.</p>
                 <p>Create a Spring Security configuration java base file, and annotated with <b>@EnableWebSecurity</b></p>
-                <p>In this class defined few Role according to access capability of the users.</p>
                 <p class="text-info"><b>SecurityConfig.java</b></p>
                 <pre>
                  <code data-language="javascript">
@@ -347,9 +347,12 @@
      }
                  </code>
                 </pre>
+                <p><b>configureGlobal()</b> method is used to defined User Roles, usernames, and passwords.
+                    In this case I' am using "inMemoryAuthentication", means keep this defined data in memory.
+                    Because we are not using a Database to store them yet.</p>
                 <p><b>Configure()</b> method is used to configure the resources availability of each user
                     called Authorization. When we use <b>"admin/**"</b>, all requested URLs begin with "/admin"
-                    only can access with Role <b>ADMIN</b>.</p>
+                    only can access people who has Role as <b>ADMIN</b>.</p>
                 <p>If we want to give access to admin as both ADMIN and USER roles we can do that like bellow</p>
                 <pre>
                     <code data-language="javascript">

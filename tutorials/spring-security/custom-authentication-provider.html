@@ -91,8 +91,8 @@
             <div class="col-lg-11 col-lg-offset-1  col-md-11 col-md-offset-1 col-sm-11 col-xs-11 ">
 
                 <h2 class="text-info">Spring Security Custom Authentication provider With MongoDB</h2>
-                <p>This tutorial is base on spring annotation and maven build tool, latest spring
-                    security, spring data-mongodb and latest spring mvc framework and MongoDB</p>
+                <p>This tutorial is based on spring annotation, maven build tool, spring
+                    security, spring data-mongodb, spring MVC framework, and MongoDB</p>
 
                 <h3>Other Posts</h3>
                 <ul >
@@ -207,9 +207,10 @@
                 <h2>Spring Application </h2>
                 <p>In this controller </p>
                 <ol>
-                    <li>If URL = <b>/admin</b>  controller will return admin.jsp page</li>
-                    <li>If URL = <b>/dba</b>  controller will return admin.jsp page</li>
-                    <li>If URL = <b>/welcome</b>  controller will return hello.jsp page</li>
+                    <li>If the URL is = "<b>/admin</b>"  controller will return <b>admin.jsp</b> page</li>
+                    <li>If the URL is = "<b>/dba</b>"  controller will return <b>admin.jsp</b> page</li>
+                    <li>If the URL is = "<b>/welcome</b>"  controller will return <b>hello.jsp</b> page</li>
+                    <li>If the URL is = <b>/rest/user</b>  controller will return users list as json array</li>
                 </ol>
                 <p>To get admin.jsp page user have to login to system.</p>
 
@@ -284,15 +285,17 @@
                     </code>
                 </pre>
 
-                <p>When request come, first it going through the security filters. If someOne don't have access
-                    to any link give and error page. Let's think when come request <b>/welcome</b> it going through the security filter
-                    and create ViewAndModel by the name of admin and show it. How is that happen? viewResolver() method in AppConfig.java(bellow) class
-                    is add prefix and suffix into our viewAndModel. True path of our hello.jsp page is <b>/WEB-INF/pages/hello.jsp</b>. It
-                    will automatically resolved by the resolver method.</p>
+                <p>When a request comes, first it going through the security filters.
+                    If someone don't have access to any link gives and error page. Let's think when a request comes to <b>/welcome</b>,
+                    it going through the security filter and create ViewAndModel by the name of admin and render it.
+                    How is that happen? viewResolver() method in AppConfig.java(bellow) class is add prefix and suffix into our viewAndModel.
+                    The true path of our hello.jsp page is <b>/WEB-INF/pages/hello.jsp</b>. It will automatically resolve by the resolver method.</p>
 
 
                 <p>We are gonna create a POJO class for Application user with Role. </p>
                 <p class="text-info"><b>ApplicationUser.java</b></p>
+                <p>The annotation <b>@Document</b> is used to defined mongodb Document. Also we can give name for
+                    the collection.If you want more details about you can read <a href="http://docs.spring.io/spring-data/mongodb/docs/current/reference/html/">Spring-Data-MongoDB</a> documentation.</p>
                 <pre>
                     <code data-language="javascript">
 package com.ajantha.model;
@@ -429,7 +432,7 @@ public  class ApplicationUser implements UserDetails {
 
 
 
-                <p>In here we have to override the methods in UserDetails interface.</p>
+                <p>In here we have to override the methods in UserDetails interface.This class provides pre-defined properties. </p>
 
                 <p class="text-info"><b>Role.java</b></p>
                 <pre>
@@ -750,7 +753,7 @@ public  class ApplicationUser implements UserDetails {
                 </pre>
                 <p>We can get the logged users name as userPricipal.name </p>
 
-                <p>To use Spring security, we need <b class="text-info">spring-security-web</b> and <b class="text-info">spring-security-config</b></p>
+                <!--<p>To use Spring security, we need <b class="text-info">spring-security-web</b> and <b class="text-info">spring-security-config</b></p>-->
 
 
 
@@ -796,8 +799,10 @@ public  class ApplicationUser implements UserDetails {
                 </pre>
 
                 <h3>Spring Security Configurations</h3>
-                <p>Create a Spring Security configuration java base file, and annotated with <b>@EnableWebSecurity</b></p>
-                <p>In this class defined few Role according to access capability of the users.</p>
+                <p>n Spring security ,we can define java files to configure the project. Does not need any XML knowledge.
+                    In this tutorial, I am gonna defined few Roles who has a different kind of capabilities.</p>
+                <p>Create a Spring Security configuration java base file <b>SecurityConfig.java</b>,
+                    and annotated with <b>@EnableWebSecurity.</b></p>
                 <p class="text-info"><b>SecurityConfig.java</b></p>
                 <pre>
                  <code data-language="javascript">
@@ -860,9 +865,13 @@ public  class ApplicationUser implements UserDetails {
 
                  </code>
                 </pre>
+                <p><b>configureGlobal()</b> method is used to defined User Roles, usernames, and passwords.
+                    In this case I' am using "inMemoryAuthentication", means keep this defined data in memory.
+                    Because we are not using a Database to store them yet.</p>
                 <p><b>Configure()</b> method is used to configure the resources availability of each user
                     called Authorization. When we use <b>"admin/**"</b>, all requested URLs begin with "/admin"
-                    only can access with Role <b>ADMIN</b>.</p>
+                    only can access people who has Role as <b>ADMIN</b>.</p>
+                <!--<p>If we want to give access to admin as both ADMIN and USER roles we can do that like bellow</p>-->
 
 
                 <p>Next create a class extends <b>AbstractSecurityWebApplicationInitializer</b>,
@@ -881,7 +890,7 @@ public  class ApplicationUser implements UserDetails {
                 </pre>
 
                 <h3>Spring MVC Configuration</h3>
-                <p>A Config class, define the view’s technology and imports above <b>SecurityConfig.java</b></p>
+                <p>The Config class, define the view’s technology and imports above <b>SecurityConfig.java</b></p>
                 <p>Spring detect this configuration class using <b>@Configuration</b> annotation and scan package
                     "com.ajantha.web.*" for Beans. And we also import security configuration class using <b>@Import</b> annotation.</p>
                 <p class="text-info"><b>AppConfig.java</b></p>
