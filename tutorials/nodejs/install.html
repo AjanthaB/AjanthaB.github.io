@@ -96,7 +96,7 @@
 
                         <h3>Other Topics</h3>
                          <li>
-                            <a href="install.html">Install Nodejs</a>
+                            <a href="install.html">Install node.js</a>
                         </li>
                         <li>
                             <a href="npm.html">node package manager</a>
@@ -109,53 +109,104 @@
                 <div class="col-lg-9  col-md-8 ">
                   
 
-                    <h3>History Of Node.js</h3>
+                    <h3 class="text-info">Install Node.js</h3>
 
-                    
-                   <p>Node.js is a platform built around Google Chrome V8 Javascript engine, to create lightweight, fast, scalable, event-driven and non-blocking I/O applications. It has an event-driven architecture capable of asynchronous I/O. These design choices aim to optimize throughput and scalability in Web applications with many input/output operations, as well as for real-time Web applications.  Node.js has become wildly popular, with programmers everywhere using it to create APIs and build new web applications. Joyent has been the chief sponsor of Node.js from the beginning.</p>
+                    <br>
+                    <h4  class="text-success">Install node.js on Windows</h4>
+                    <p>First, <a href="https://nodejs.org/en/">download</a> the latest node.js version. But <b>LTS</b> version is recommended. Next, double click on the .exe file and install. Now open the CMD and type <b>node -v</b>. You can see the output as follows. </p>
 
-                    
-                    <p>Node.js is a runtime system for creating (mostly) server-side applications. It's best known as a popular means for JavaScript coders to build real-time Web APIs. Node.js have several excellent frameworks including Express.js, Restify.js, and Hapi.js for building rich high customizable web applications. Also, Node.js have operating systems wrappers, microcontrollers, and robots.</p>
+                     <pre>
+                       <code data-language="javascript">
+    $ node -v
+    // you can see result as
+    v4.4.4
+    // version can be change                             
+                     </code>
+                   </pre>
+                   <p>Next, write the fitst example using node.js to make sure it's working properly.</p>
+                   <pre>
+                       <code data-language="javascript">
+    $ node
+    > console.log("hello nodejs");
+    hello nodejs    // result will be like this
+                     </code>
+                   </pre>
 
-                    <p>Corporate users of Node.js software include</p>
-                    <ul>
-                        <li> GoDaddy</li>
-                        <li>Groupon</li>
-                        <li>IBM</li>
-                        <li>LinkedIn</li>
-                        <li>Microsoft</li>
-                        <li>Netflix</li>
-                        <li>PayPal</li>
-                        <li>Rakuten</li>
-                        <li>SAP</li>
-                        <li>Voxer</li>
-                        <li>Walmart</li>
-                        <li>Yahoo</li>
-       
-                    </ul>
-
-
-                    <p> The initial release of node.js supports only Linux OS. Dahl was inspired to create Node.js after seeing a file upload progress bar on Flickr. The browser did not know how much of the file had been uploaded and had to query the Web server. Dahl desired an easier way.
-Dahl demonstrated the project at the inaugural European JSConf on November 8, 2009. Node.js combined Google's V8 JavaScript engine, an event loop and a low-level I/O API. </p>
-
-                    <p>The package Manager called NPM was introduces
-In 2011. The creator of the package manager was Isaac Schlueter. The package manager makes it easier for programmers to publish and share the source code of Node.js libraries and is designed to simplify installation, updating, and uninstallation of libraries.</p>
-                
-                    <p>In June 2011, Microsoft and Joyent implemented a native Windows version of Node.js. The first Node.js build supporting Windows was released in July 2011.</p>
-
-                    <p>In January 2012, Dahl stepped aside, promoting coworker and npm creator Isaac Schlueter to manage the project. In December 2014, Fedor Indutny started io.js, a fork of Node.js. Due to internal conflict over Joyent's governance, io.js was created as an open governance alternative with a separate technical committee. Unlike Node.js, the authors planned to keep io.js up-to-date with the latest releases of the Google V8 JavaScript engine. In February 2015, the intent to form a neutral Node.js Foundation was announced.
-                    </p>
-                    <p>Image of Dhal</p>
-                    <img src="img/ryan_dahl.jpg">
-                    <p>
-                     By June 2015, the Node.js and io.js communities voted to work together under the Node.js Foundation. In September 2015, Node.js v0.12 and io.js v3.3 were merged back together into Node v4.0. This brought V8 ES6 features into Node.js and a long-term support release cycle. As of 2016, the io.js website recommends that developers switch back to Node.js. the latest release of the Node.js is v6.2.0.</p>
+                   <p>Or you can download binary file into folder and add the path to enviroment variable.</p>
 
 
-                    <p>Watch this video to here this story from Dhal's words.</p>
+                   <br>
+                   <h4 class="text-success">Install node.js on Linux</h4>
+                   <p>In Linux you can install using <b>apt-get</b> or binary file. But the binary file is recommended because in Linux, packages are not install in one place. That is a disadvantage. So when you install something into Linux always try to install that using a binary file.</p>
 
-                    <iframe src="http://www.youtube.com/watch?v=SAc0vQCC6UQ" height="300" width="400" ></iframe>
-                   <p>Thank you.</p>
-      
+                   <h4>Install using apt-get</h4>
+                   <p>First, open a terminal and type following commands.</p>
+                  <pre>
+                       <code data-language="javascript">
+    $ sudo apt-get install nodejs
+    // this will install the latest version available                             
+                     </code>
+                   </pre>
+                   <p>If you install successfully type this command.</p>
+                   <pre>
+                       <code data-language="javascript">
+    $ node -v
+    // you can see result as
+    v4.4.4
+    // version can be change                             
+                     </code>
+                   </pre>
+                   <p>
+                   <p>Next, write the fitst example using node.js to make sure it's working properly.</p>
+                   <pre>
+                       <code data-language="javascript">
+    $ node
+    > console.log("hello nodejs");
+    hello nodejs    // result will be like this
+                     </code>
+                   </pre>
+
+                   <h4>Install using binary file</h4>
+                   <p>Fitst, download the binary file from nodejs.org and put it some someware and extract it. In mycase folder is <b>/home/ajantha/programmes/nodejs/nodejs-v4.4.4-linux-x64</b>. Next, you should add the path. You can do this three ways. You can add the path to <b>.bashrc</b> file or <b>/etc/enviroment</b> file or <b>/etc/profile/</b>. I put it in <b>/etc/profile</b> file like bellow.</p>
+
+                    <pre>
+                       <code data-language="javascript">
+    $ export NODE_HOME=/home/ajantha/programmes/nodejs/node-v4.4.4-linux-x64
+    $ export PATH=$NODE_HOME/bin:$PATH
+                     </code>
+                   </pre>
+
+                   <p>After that, type following command or restart the computer.</p>
+
+                   <pre>
+                       <code data-language="javascript">
+    $ source  /etc//profile
+    $ node -v
+    // you can see result as
+    v4.4.4
+    // version can be change                           
+                     </code>
+                   </pre>
+
+                   <p>
+                   <p>Next, write the fitst example using node.js to make sure it's working properly.</p>
+                   <pre>
+                       <code data-language="javascript">
+    $ node
+    > console.log("hello nodejs");
+    hello nodejs    // result will be like this
+                     </code>
+                   </pre>
+
+                   <p>Look like you successfully complete the installation. Thank you.</p>
+
+
+                   <p>See other post also</p>
+                   <ul >
+                       <li><a class="text-info" href="index.html">history of node.js</a></li>
+                       <li><a class="text-info" href="npm.html">node package manager(npm)</a></li>
+                       <li><a class="text-info" href="nvm.html">node version manager(nvm)</a></li>
+                   </ul>
                     
 
                 </div>
@@ -210,7 +261,7 @@ In 2011. The creator of the package manager was Isaac Schlueter. The package man
 
     <!-- Custom Theme JavaScript -->
     <script src="../js/clean-blog.min.js"></script>
-    <!-- <script src="../js/rainbow-custom.min.js" type="text/javascript" charset="utf-8"></script> -->
+    <script src="../js/rainbow-custom.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/lan/shell.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/lan/javascript.js" type="text/javascript" charset="utf-8"></script>
 
