@@ -1,0 +1,28 @@
+title: Ajantha Bandara
+description: Ajantha Bandara, Software Engineer, this blog contains tutorials about javascript, angular 2, nodejs, raspberry pi3, git
+author: Ajantha Bandara
+logo: /static/img/avatar.JPG
+github: https://github.com/ajanthab
+about: Software Engineer, Freelance developer
+
+baseurl: ""
+url: "https://ajanthab.github.io"
+
+allowsearch: true
+
+disqus_shortname: aboutashu
+google_analytics: UA-72862926-1
+
+share:
+  twitter_username: \#
+  fb_appid: 000000000000
+
+
+enableTags: true
+tagarray: [node.js]
+
+paginate: 20
+per_page: 20
+paginate_path: "/page:num/"
+markdown: kramdown
+gems: [jekyll-paginate, jekyll-gist]
