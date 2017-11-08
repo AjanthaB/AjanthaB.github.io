@@ -5,7 +5,7 @@ logo: /static/img/avatar.JPG
 github: https://github.com/ajanthab
 about: Software Engineer, Freelance developer
 
-baseurl: "My-Site"
+baseurl: ""
 url: ""
 
 allowsearch: true
