@@ -1,22 +1,22 @@
 [
   {
     "icon": "fa-linkedin",
-    "link": ""
+    "link": "https://www.linkedin.com/in/ajanthab/"
   },
   {
     "icon": "fa-github",
-    "link": ""
+    "link": "https://github.com/AjanthaB"
   },
   {
     "icon": "fa-google-plus",
-    "link": ""
+    "link": "https://plus.google.com/u/0/114102320751274961471"
   },
   {
     "icon": "fa-facebook",
-    "link": ""
-  },
-  {
-    "icon": "fa-twitter",
-    "link": ""
+    "link": "https://www.facebook.com/ajanthapkb.bandara"
   }
+  // {
+  //   "icon": "fa-twitter",
+  //   "link": ""
+  // }
 ]
