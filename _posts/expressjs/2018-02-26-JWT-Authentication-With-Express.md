@@ -13,6 +13,8 @@ A JSON Web Token (JWT) is a JSON object that is defined in [RFC 7519](https://to
 
 Bellow diagram shows the how jwt work with Client and ther Server
 
+![diagram](https://cdn.auth0.com/content/jwt/jwt-diagram.png)
+
 
 In this example client send a login request(username and password) to server and if the login process success the server send a **jwt** token to client. Client need to send that token with each http request and server check that token valid or not. If valid send the correct response to user.
 
