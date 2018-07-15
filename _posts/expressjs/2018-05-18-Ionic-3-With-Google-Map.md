@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Google Map with Ionic 3 and Angular 5"
-date:   2018-05-18 01:00:39
+date:   2018-07-13 01:00:39
 categories: 
 ---
 
@@ -341,3 +341,8 @@ Add this code snippet to index.html file.
 Now you can see this click event of infowindow working perfectly like below.
 
 ![infowindowClick]({{"/assets/ionic-google-map/infowindow-click.png"}})
+
+
+You can download the full source code from [here](https://github.com/AjanthaB/ionic-3-google-map.git);
+
+Thak you. If you find this tutorial helps you, Please share this.
