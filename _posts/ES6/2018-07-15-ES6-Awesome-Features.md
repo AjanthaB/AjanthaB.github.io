@@ -5,7 +5,7 @@ date:   2018-07-15 07:04:39
 categories: javascript es6 js
 ---
 
-# **ES6 Features You may not know**
+# **ES6 Features that you may not know**
 
 This article contains the new features of **ES6** You may not know yet.
 
