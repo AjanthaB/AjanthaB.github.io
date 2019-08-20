@@ -68,9 +68,7 @@ self.onmessage = function(e) {
 }
 ```
 
-## Note
-
-Since workers are resource intensive, better terminate it after the job completed. This can be done in our main.js file or inside the Worker.js file as bellow.
+**Note** - Since workers are resource intensive, better terminate it after the job completed. This can be done in our main.js file or inside the Worker.js file as bellow.
 
 **main.js**
 
